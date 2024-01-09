@@ -6,6 +6,20 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
 
+        <!-- Display irclickid value -->
+        <p id="irclickidDisplay"></p>
+
+        <script>
+            // Function to retrieve irclickid from GTM data layer
+            function getIrclickid() {
+            return window.dataLayer && window.dataLayer[0] && window.dataLayer[0].irclickid ? window.dataLayer[0].irclickid : '';
+            }
+
+            // Display irclickid value
+            var irclickidValue = getIrclickid();
+            document.getElementById('irclickidDisplay').innerText = 'irclickid: ' + irclickidValue;
+        </script>
+
         <head>
 
             <!-- Google Tag Manager -->
