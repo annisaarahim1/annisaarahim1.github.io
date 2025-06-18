@@ -55,6 +55,9 @@
     td {
       min-height: 50px;
     }
+    .office {
+      background-color: #e6ccff;
+    }
   </style>
 </head>
 <body>
@@ -121,13 +124,30 @@
         table += `<tr><th>${day}</th>`;
         for (const hour of hours) {
           const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-          const activities = [
-            matchEvent(classSchedule[day], hourStr),
-            matchEvent(husbandSchedule[day], hourStr) && `👨‍💼 Hubby: ${matchEvent(husbandSchedule[day], hourStr)}`,
-            matchEvent(officeSchedule[day], hourStr) && `🏢 Office: ${matchEvent(officeSchedule[day], hourStr)}`,
-            matchEvent(otherSchedule[day], hourStr) && `🧋 ${matchEvent(otherSchedule[day], hourStr)}`
+          const currentHour = hour;
+
+          let classText = matchEvent(classSchedule[day], hourStr);
+          let husbandText = '';
+          let officeText = '';
+          let lepakText = matchEvent(otherSchedule[day], hourStr);
+
+          if (day === 'Monday' && currentHour === 8) husbandText = '👨‍💼 Husband go to work';
+          if (day === 'Monday' && currentHour === 18) husbandText = '🏡 Husband back from work';
+
+          // Auto-fill office 9am-6pm weekdays
+          if (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && currentHour >= 9 && currentHour < 18) {
+            officeText = '🏢 Office';
+          }
+
+          const combined = [
+            classText,
+            husbandText,
+            officeText,
+            lepakText && `🧋 ${lepakText}`
           ].filter(Boolean).join('<br>');
-          table += `<td>${activities}</td>`;
+
+          const isOfficeHour = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && currentHour >= 9 && currentHour < 18;
+          table += `<td class="${isOfficeHour ? 'office' : ''}">${combined}</td>`;
         }
         table += '</tr>';
       }
