@@ -22,23 +22,25 @@
   }
     
   .container {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 1rem;
-    justify-content: center;
-    margin: 2rem;
-    overflow-x: auto;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 1.5rem;
+}
 
-  .section {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 2px dashed #c6dac6;
-    border-radius: 12px;
-    padding: 1rem;
-    flex-shrink: 0;
-    box-shadow: 0 0 10px #e7d7e7;
-    min-width: 300px;
-  }
+.section {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1.5px dashed #c6dac6;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  flex: 0 0 200px;
+  box-shadow: 0 0 8px #e7d7e7;
+}
+
+.section.office {
+  flex: 0 0 150px;
+}
 
   /* Make Office Days box smaller */
   .section.office {
@@ -137,6 +139,28 @@ tr:nth-child(even) {
     font-size: 1.5rem;
     margin-bottom: 0.3rem;
   }
+
+    .day-input {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section label {
+  font-size: 0.9rem;
+  flex: 0 0 70px;
+}
+
+.section input[type="text"],
+.section input[type="checkbox"] {
+  flex-grow: 1;
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+    
 </style>
 
   
