@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nisa's Fitness Planner</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #d63384;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      cursor: pointer;
+    }
+    pre {
+      background: #ffe4ec;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🩷 Nisa's Monthly Fitness Planner 🩷</h1>
+
+  <label>Available Class Schedule:</label>
+  <textarea id="classSchedule" placeholder="e.g. Zumba Mon 6pm, Yoga Wed 7pm..."></textarea>
+
+  <label>Your Husband’s Work Schedule:</label>
+  <textarea id="husbandSchedule" placeholder="e.g. Sun-Thu: 8am-6pm / 11am-10pm alt weeks"></textarea>
+
+  <label>Your Office Days:</label>
+  <input id="officeDays" type="text" placeholder="e.g. Monday and Thursday" />
+
+  <label>Other Plans (Socials, Appointments etc):</label>
+  <textarea id="otherPlans" placeholder="e.g. Sat lunch with friends, Wed movie night"></textarea>
+
+  <button onclick="generatePlan()">✨ Generate My Fitness Plan ✨</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    function generatePlan() {
+      const classSchedule = document.getElementById('classSchedule').value;
+      const husbandSchedule = document.getElementById('husbandSchedule').value;
+      const officeDays = document.getElementById('officeDays').value;
+      const otherPlans = document.getElementById('otherPlans').value;
+
+      const plan = `Here's your suggested weekly fitness plan based on your inputs:\n\nClass Schedule: ${classSchedule}\nHusband's Schedule: ${husbandSchedule}\nOffice Days: ${officeDays}\nOther Plans: ${otherPlans}\n\n💪 Suggested Fitness Plan (sample):
+- Monday: Gym after office (6:30 PM) – Strength Training
+- Tuesday: Home workout (morning) – Pilates
+- Wednesday: Zumba Class (6 PM)
+- Thursday: Rest (Office day + dinner with friends)
+- Friday: Gym (7 PM) – HIIT session
+- Saturday: Morning walk with hubby 💕
+- Sunday: Yoga Class (9 AM)`;
+
+      document.getElementById('output').textContent = plan;
+    }
+  </script>
+</body>
+</html>
