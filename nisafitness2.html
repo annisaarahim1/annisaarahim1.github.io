@@ -23,15 +23,16 @@
     
 .container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* 👈 prevent wrapping */
   justify-content: space-between;
   gap: 1rem;
   margin: 1.5rem;
   padding: 0 1rem;
+  overflow-x: auto; /* 👈 make it scroll if needed */
 }
 
 .section {
-  flex: 1 1 22%;
+ flex: 0 0 24%; /* 👈 control the width precisely */
   min-width: 200px;
 }
    
