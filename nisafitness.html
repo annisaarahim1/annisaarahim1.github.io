@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nisa's Fitness Planner</title>
+  <title>Nisa's Fitness Timetable</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #fff0f5;
       padding: 2rem;
-      max-width: 700px;
+      max-width: 1000px;
       margin: auto;
     }
     h1 {
@@ -39,51 +39,101 @@
       margin-top: 1.5rem;
       cursor: pointer;
     }
-    pre {
-      background: #ffe4ec;
-      padding: 1rem;
-      border-radius: 12px;
-      margin-top: 1.5rem;
-      white-space: pre-wrap;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    th {
+      background-color: #ffdce5;
+    }
+    td {
+      min-height: 50px;
     }
   </style>
 </head>
 <body>
-  <h1>🩷 Nisa's Monthly Fitness Planner 🩷</h1>
+  <h1>🩷 Nisa's Weekly Fitness Timetable 🩷</h1>
 
-  <label>Available Class Schedule:</label>
-  <textarea id="classSchedule" placeholder="e.g. Zumba Mon 6pm, Yoga Wed 7pm..."></textarea>
+  <label>Enter your weekly class schedule (e.g. Monday: Yoga 9am, Zumba 6pm):</label>
+  <textarea id="classSchedule" rows="6" placeholder="Monday: Zumba 6pm\nTuesday: Yoga 7pm\n..."></textarea>
 
-  <label>Your Husband’s Work Schedule:</label>
-  <textarea id="husbandSchedule" placeholder="e.g. Sun-Thu: 8am-6pm / 11am-10pm alt weeks"></textarea>
+  <label>Enter your husband's working hours (e.g. Monday: 8am-6pm, 11am-10pm):</label>
+  <textarea id="husbandSchedule" rows="6" placeholder="Monday: 8am-6pm\nTuesday: 11am-10pm\n..."></textarea>
 
-  <label>Your Office Days:</label>
-  <input id="officeDays" type="text" placeholder="e.g. Monday and Thursday" />
+  <label>Enter your office days and hours (e.g. Monday: 9am-6pm):</label>
+  <textarea id="officeDays" rows="6" placeholder="Monday: 9am-6pm\nThursday: 9am-6pm"></textarea>
 
-  <label>Other Plans (Socials, Appointments etc):</label>
-  <textarea id="otherPlans" placeholder="e.g. Sat lunch with friends, Wed movie night"></textarea>
+  <label>Enter other activities or lepak time (e.g. Friday: 8pm Movie Night, Sunday: Brunch 11am):</label>
+  <textarea id="otherPlans" rows="6" placeholder="Friday: Movie Night 8pm\nSunday: Brunch 11am"></textarea>
 
-  <button onclick="generatePlan()">✨ Generate My Fitness Plan ✨</button>
+  <button onclick="generateTable()">🗓️ Generate Timetable</button>
 
-  <pre id="output"></pre>
+  <div id="tableContainer"></div>
 
   <script>
-    function generatePlan() {
-      const classSchedule = document.getElementById('classSchedule').value;
-      const husbandSchedule = document.getElementById('husbandSchedule').value;
-      const officeDays = document.getElementById('officeDays').value;
-      const otherPlans = document.getElementById('otherPlans').value;
+    function generateTable() {
+      const classInput = document.getElementById('classSchedule').value.trim();
+      const husbandInput = document.getElementById('husbandSchedule').value.trim();
+      const officeInput = document.getElementById('officeDays').value.trim();
+      const otherInput = document.getElementById('otherPlans').value.trim();
 
-      const plan = `Here's your suggested weekly fitness plan based on your inputs:\n\nClass Schedule: ${classSchedule}\nHusband's Schedule: ${husbandSchedule}\nOffice Days: ${officeDays}\nOther Plans: ${otherPlans}\n\n💪 Suggested Fitness Plan (sample):
-- Monday: Gym after office (6:30 PM) – Strength Training
-- Tuesday: Home workout (morning) – Pilates
-- Wednesday: Zumba Class (6 PM)
-- Thursday: Rest (Office day + dinner with friends)
-- Friday: Gym (7 PM) – HIIT session
-- Saturday: Morning walk with hubby 💕
-- Sunday: Yoga Class (9 AM)`;
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const hours = Array.from({ length: 16 }, (_, i) => i + 9); // 9am to 12am
 
-      document.getElementById('output').textContent = plan;
+      function parseSchedule(input) {
+        const lines = input.split('\n');
+        const schedule = {};
+        for (const line of lines) {
+          const [day, events] = line.split(':');
+          if (day && events) {
+            const cleanDay = day.trim();
+            const cleanEvents = events.split(',').map(e => e.trim());
+            schedule[cleanDay] = cleanEvents;
+          }
+        }
+        return schedule;
+      }
+
+      const classSchedule = parseSchedule(classInput);
+      const husbandSchedule = parseSchedule(husbandInput);
+      const officeSchedule = parseSchedule(officeInput);
+      const otherSchedule = parseSchedule(otherInput);
+
+      function matchEvent(events, hourStr) {
+        if (!events) return '';
+        return events.find(e => e.includes(hourStr)) || '';
+      }
+
+      let table = '<table><thead><tr><th>Day / Time</th>';
+      for (const hour of hours) {
+        const hourLabel = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+        table += `<th>${hourLabel}</th>`;
+      }
+      table += '</tr></thead><tbody>';
+
+      for (const day of days) {
+        table += `<tr><th>${day}</th>`;
+        for (const hour of hours) {
+          const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+          const activities = [
+            matchEvent(classSchedule[day], hourStr),
+            matchEvent(husbandSchedule[day], hourStr) && `👨‍💼 Hubby: ${matchEvent(husbandSchedule[day], hourStr)}`,
+            matchEvent(officeSchedule[day], hourStr) && `🏢 Office: ${matchEvent(officeSchedule[day], hourStr)}`,
+            matchEvent(otherSchedule[day], hourStr) && `🧋 ${matchEvent(otherSchedule[day], hourStr)}`
+          ].filter(Boolean).join('<br>');
+          table += `<td>${activities}</td>`;
+        }
+        table += '</tr>';
+      }
+
+      table += '</tbody></table>';
+      document.getElementById('tableContainer').innerHTML = table;
     }
   </script>
 </body>
