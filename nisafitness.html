@@ -6,70 +6,87 @@
   <title>Weekly Fitness Planner</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff5fb;
-      padding: 20px;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #d26fa7;
-    }
-    .section {
-      margin-bottom: 20px;
-    }
-    .day-input {
-      margin: 5px 0;
-    }
-    label {
-      display: inline-block;
-      width: 100px;
-      font-weight: bold;
-    }
-    input[type="text"] {
-      width: 250px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 6px;
-      text-align: center;
-      vertical-align: top;
-    }
-    th {
-      background-color: #f8cbe6;
-    }
-    .office {
-      background-color: #ead9f7;
-    }
-    .officeText {
-      color: #5a3c8f;
-      font-weight: bold;
-    }
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff5fb;
+  padding: 20px;
+  color: #333;
+}
+h1 {
+  text-align: center;
+  color: #d26fa7;
+}
+.input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+.section {
+  flex: 1;
+  min-width: 200px;
+  background-color: #fff;
+  border: 1px solid #f0b7d3;
+  padding: 10px;
+  border-radius: 8px;
+}
+.section h3 {
+  margin-top: 0;
+  color: #b25390;
+}
+.day-input {
+  margin: 5px 0;
+}
+label {
+  display: inline-block;
+  width: 80px;
+  font-weight: bold;
+}
+input[type="text"] {
+  width: 140px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 6px;
+  text-align: center;
+  vertical-align: top;
+}
+th {
+  background-color: #f8cbe6;
+}
+.office {
+  background-color: #ead9f7;
+}
+.officeText {
+  color: #5a3c8f;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
   <h1>💪 Weekly Fitness Planner</h1>
 
+  <div class="input-wrapper">
   <div class="section" id="classScheduleInputs">
     <h3>🏋️‍♀️ Class Schedule</h3>
   </div>
 
   <div class="section" id="husbandScheduleInputs">
-    <h3>👨‍💼 Husband's Work Schedule (e.g. 10am-6pm)</h3>
+    <h3>👨‍💼 Husband's Work</h3>
   </div>
 
   <div class="section" id="officeScheduleInputs">
-    <h3>🏢 Do You Work in Office?</h3>
+    <h3>🏢 Office Days</h3>
   </div>
 
   <div class="section" id="otherScheduleInputs">
-    <h3>🧋 Lepak / Other Events</h3>
+    <h3>🧋 Lepak Plans</h3>
   </div>
+</div>
 
   <button onclick="generateTable()">✨ Generate Timetable</button>
 
