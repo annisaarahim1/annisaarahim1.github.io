@@ -21,10 +21,18 @@
       display: block;
       margin-top: 1rem;
     }
-    textarea, input {
-      width: 100%;
-      padding: 0.5rem;
+    .day-input {
+      display: flex;
+      align-items: center;
       margin-top: 0.3rem;
+    }
+    .day-input label {
+      width: 100px;
+      margin-right: 1rem;
+    }
+    .day-input input {
+      flex: 1;
+      padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
@@ -63,50 +71,64 @@
 <body>
   <h1>🩷 Nisa's Weekly Fitness Timetable 🩷</h1>
 
-  <label>Enter your weekly class schedule (e.g. Monday: Yoga 9am, Zumba 6pm):</label>
-  <textarea id="classSchedule" rows="14" placeholder="Monday: \nTuesday: \nWednesday: \nThursday: \nFriday: \nSaturday: \nSunday:"></textarea>
+  <label>Enter your weekly class schedule:</label>
+  <div id="classScheduleInputs" class="input-group"></div>
 
-  <label>Enter your husband's working hours (e.g. Monday: 8am-6pm, 11am-10pm):</label>
-  <textarea id="husbandSchedule" rows="14" placeholder="Monday: \nTuesday: \nWednesday: \nThursday: \nFriday: \nSaturday: \nSunday:"></textarea>
+  <label>Enter your husband's working hours:</label>
+  <div id="husbandScheduleInputs" class="input-group"></div>
 
-  <label>Enter your office days and hours (e.g. Monday: 9am-6pm):</label>
-  <textarea id="officeDays" rows="14" placeholder="Monday: \nTuesday: \nWednesday: \nThursday: \nFriday: \nSaturday: \nSunday:"></textarea>
+  <label>Enter your office days and hours:</label>
+  <div id="officeScheduleInputs" class="input-group"></div>
 
-  <label>Enter other activities or lepak time (e.g. Friday: 8pm Movie Night, Sunday: Brunch 11am):</label>
-  <textarea id="otherPlans" rows="14" placeholder="Monday: \nTuesday: \nWednesday: \nThursday: \nFriday: \nSaturday: \nSunday:"></textarea>
+  <label>Enter other activities or lepak time:</label>
+  <div id="otherScheduleInputs" class="input-group"></div>
 
   <button onclick="generateTable()">🗓️ Generate Timetable</button>
 
   <div id="tableContainer"></div>
 
   <script>
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    function createInputs(containerId, prefix) {
+      const container = document.getElementById(containerId);
+      days.forEach(day => {
+        const div = document.createElement('div');
+        div.className = 'day-input';
+        const label = document.createElement('label');
+        label.textContent = `${day}:`;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = `${prefix}_${day}`;
+        div.appendChild(label);
+        div.appendChild(input);
+        container.appendChild(div);
+      });
+    }
+
+    createInputs('classScheduleInputs', 'class');
+    createInputs('husbandScheduleInputs', 'husband');
+    createInputs('officeScheduleInputs', 'office');
+    createInputs('otherScheduleInputs', 'other');
+
     function generateTable() {
-      const classInput = document.getElementById('classSchedule').value.trim();
-      const husbandInput = document.getElementById('husbandSchedule').value.trim();
-      const officeInput = document.getElementById('officeDays').value.trim();
-      const otherInput = document.getElementById('otherPlans').value.trim();
-
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      const hours = Array.from({ length: 16 }, (_, i) => i + 9); // 9am to 12am
-
-      function parseSchedule(input) {
-        const lines = input.split('\n');
+      function collectSchedule(prefix) {
         const schedule = {};
-        for (const line of lines) {
-          const [day, events] = line.split(':');
-          if (day && events) {
-            const cleanDay = day.trim();
-            const cleanEvents = events.split(',').map(e => e.trim());
-            schedule[cleanDay] = cleanEvents;
+        days.forEach(day => {
+          const value = document.getElementById(`${prefix}_${day}`).value.trim();
+          if (value) {
+            schedule[day] = value.split(',').map(e => e.trim());
           }
-        }
+        });
         return schedule;
       }
 
-      const classSchedule = parseSchedule(classInput);
-      const husbandSchedule = parseSchedule(husbandInput);
-      const officeSchedule = parseSchedule(officeInput);
-      const otherSchedule = parseSchedule(otherInput);
+      const classSchedule = collectSchedule('class');
+      const husbandSchedule = collectSchedule('husband');
+      const officeSchedule = collectSchedule('office');
+      const otherSchedule = collectSchedule('other');
+
+      const hours = Array.from({ length: 16 }, (_, i) => i + 9); // 9am to 12am
 
       function matchEvent(events, hourStr) {
         if (!events) return '';
@@ -127,16 +149,16 @@
           const currentHour = hour;
 
           let classText = matchEvent(classSchedule[day], hourStr);
-          let husbandText = '';
-          let officeText = '';
+          let husbandText = matchEvent(husbandSchedule[day], hourStr);
+          let officeText = matchEvent(officeSchedule[day], hourStr);
           let lepakText = matchEvent(otherSchedule[day], hourStr);
 
+          // Additional husband notes
           if (day === 'Monday' && currentHour === 8) husbandText = '👨‍💼 Husband go to work';
           if (day === 'Monday' && currentHour === 18) husbandText = '🏡 Husband back from work';
 
-          // Auto-fill office 9am-6pm weekdays
           if (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && currentHour >= 9 && currentHour < 18) {
-            officeText = '🏢 Office';
+            officeText = officeText || '🏢 Office';
           }
 
           const combined = [
