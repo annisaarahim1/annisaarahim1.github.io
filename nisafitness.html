@@ -2,199 +2,188 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nisa's Fitness Timetable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Fitness Planner</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #fff0f5;
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+      background-color: #fff5fb;
+      padding: 20px;
+      color: #333;
     }
     h1 {
       text-align: center;
-      color: #d63384;
+      color: #d26fa7;
     }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 1rem;
+    .section {
+      margin-bottom: 20px;
     }
     .day-input {
-      display: flex;
-      align-items: center;
-      margin-top: 0.3rem;
+      margin: 5px 0;
     }
-    .day-input label {
+    label {
+      display: inline-block;
       width: 100px;
-      margin-right: 1rem;
-    }
-    .day-input input {
-      flex: 1;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    button {
-      background-color: #ff69b4;
-      color: white;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 10px;
-      width: 100%;
       font-weight: bold;
-      margin-top: 1.5rem;
-      cursor: pointer;
+    }
+    input[type="text"] {
+      width: 250px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 2rem;
+      font-size: 14px;
     }
     th, td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
+      border: 1px solid #ddd;
+      padding: 6px;
       text-align: center;
+      vertical-align: top;
     }
     th {
-      background-color: #ffdce5;
-    }
-    td {
-      min-height: 50px;
+      background-color: #f8cbe6;
     }
     .office {
-      background-color: #e6ccff;
+      background-color: #ead9f7;
+    }
+    .officeText {
+      color: #5a3c8f;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>🩷 Nisa's Weekly Fitness Timetable 🩷</h1>
+  <h1>💪 Weekly Fitness Planner</h1>
 
-  <label>Enter your weekly class schedule:</label>
-  <div id="classScheduleInputs" class="input-group"></div>
+  <div class="section" id="classScheduleInputs">
+    <h3>🏋️‍♀️ Class Schedule</h3>
+  </div>
 
-  <label>Enter your husband's working hours:</label>
-  <div id="husbandScheduleInputs" class="input-group"></div>
+  <div class="section" id="husbandScheduleInputs">
+    <h3>👨‍💼 Husband's Work Schedule (e.g. 10am-6pm)</h3>
+  </div>
 
-  <label>Enter your office days and hours:</label>
-  <div id="officeScheduleInputs" class="input-group"></div>
+  <div class="section" id="officeScheduleInputs">
+    <h3>🏢 Do You Work in Office?</h3>
+  </div>
 
-  <label>Enter other activities or lepak time:</label>
-  <div id="otherScheduleInputs" class="input-group"></div>
+  <div class="section" id="otherScheduleInputs">
+    <h3>🧋 Lepak / Other Events</h3>
+  </div>
 
-  <button onclick="generateTable()">🗓️ Generate Timetable</button>
+  <button onclick="generateTable()">✨ Generate Timetable</button>
 
-  <div id="tableContainer"></div>
+  <div id="tableContainer" style="margin-top: 30px;"></div>
 
-<script>
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  <script>
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  function createInputs(containerId, prefix) {
-    const container = document.getElementById(containerId);
-    days.forEach(day => {
-      const div = document.createElement('div');
-      div.className = 'day-input';
-      const label = document.createElement('label');
-      label.textContent = `${day}:`;
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.id = `${prefix}_${day}`;
-      div.appendChild(label);
-      div.appendChild(input);
-      container.appendChild(div);
-    });
-  }
+    function createInputs(containerId, prefix, isCheckbox = false) {
+      const container = document.getElementById(containerId);
+      days.forEach(day => {
+        const div = document.createElement('div');
+        div.className = 'day-input';
+        const label = document.createElement('label');
+        label.textContent = `${day}:`;
+        const input = document.createElement(isCheckbox ? 'input' : 'input');
+        input.type = isCheckbox ? 'checkbox' : 'text';
+        input.id = `${prefix}_${day}`;
+        div.appendChild(label);
+        div.appendChild(input);
+        container.appendChild(div);
+      });
+    }
 
-  createInputs('classScheduleInputs', 'class');
-  createInputs('husbandScheduleInputs', 'husband');
-  createInputs('officeScheduleInputs', 'office');
-  createInputs('otherScheduleInputs', 'other');
+    createInputs('classScheduleInputs', 'class');
+    createInputs('husbandScheduleInputs', 'husband');
+    createInputs('officeScheduleInputs', 'office', true);
+    createInputs('otherScheduleInputs', 'other');
 
-  function parseTimeRange(str) {
-    const match = str.match(/(\d{1,2}(am|pm))\s*-\s*(\d{1,2}(am|pm))/i);
-    if (!match) return [];
-    return [match[1].toLowerCase(), match[3].toLowerCase()];
-  }
+    function parseTimeRange(str) {
+      const match = str.match(/(\d{1,2}(am|pm))\s*-\s*(\d{1,2}(am|pm))/i);
+      if (!match) return [];
+      return [match[1].toLowerCase(), match[3].toLowerCase()];
+    }
 
-  function collectSchedule(prefix) {
-    const schedule = {};
-    days.forEach(day => {
-      const value = document.getElementById(`${prefix}_${day}`).value.trim();
-      if (value) {
-        schedule[day] = value.split(',').map(e => e.trim());
+    function collectSchedule(prefix, isCheckbox = false) {
+      const schedule = {};
+      days.forEach(day => {
+        const el = document.getElementById(`${prefix}_${day}`);
+        const value = isCheckbox ? el.checked : el.value.trim();
+        if (value) {
+          schedule[day] = isCheckbox ? true : value.split(',').map(e => e.trim());
+        }
+      });
+      return schedule;
+    }
+
+    function generateTable() {
+      const classSchedule = collectSchedule('class');
+      const husbandSchedule = collectSchedule('husband');
+      const officeSchedule = collectSchedule('office', true);
+      const otherSchedule = collectSchedule('other');
+
+      const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6am to 12am
+
+      function to24hr(hourStr) {
+        let num = parseInt(hourStr);
+        if (hourStr.includes('pm') && num !== 12) num += 12;
+        if (hourStr.includes('am') && num === 12) num = 0;
+        return num;
       }
-    });
-    return schedule;
-  }
 
-  function generateTable() {
-    const classSchedule = collectSchedule('class');
-    const husbandSchedule = collectSchedule('husband');
-    const officeSchedule = collectSchedule('office');
-    const otherSchedule = collectSchedule('other');
-
-    const hours = Array.from({ length: 16 }, (_, i) => i + 9); // 9am to 12am
-
-    function to24hr(hourStr) {
-      let num = parseInt(hourStr);
-      if (hourStr.includes('pm') && num !== 12) num += 12;
-      if (hourStr.includes('am') && num === 12) num = 0;
-      return num;
-    }
-
-    let table = '<table><thead><tr><th>Day / Time</th>';
-    for (const hour of hours) {
-      const hourLabel = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-      table += `<th>${hourLabel}</th>`;
-    }
-    table += '</tr></thead><tbody>';
-
-    for (const day of days) {
-      table += `<tr><th>${day}</th>`;
+      let table = '<table><thead><tr><th>Day / Time</th>';
       for (const hour of hours) {
-        const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-
-        let classText = classSchedule[day]?.find(e => e.includes(hourStr)) || '';
-        let lepakText = otherSchedule[day]?.find(e => e.includes(hourStr)) || '';
-        let officeText = officeSchedule[day]?.find(e => e.includes(hourStr)) || '';
-
-        // Office hours (default 9–6)
-        if (['Monday','Tuesday','Wednesday','Thursday','Friday'].includes(day) && hour >= 9 && hour < 18) {
-          officeText = officeText || '🏢 Office';
-        }
-
-        // Husband time parsing
-        let husbandText = '';
-        if (husbandSchedule[day]) {
-          husbandSchedule[day].forEach(range => {
-            const [start, end] = parseTimeRange(range);
-            if (start && to24hr(start) === hour) {
-              husbandText = '👨‍💼 Husband go to work';
-            }
-            if (end && to24hr(end) === hour) {
-              husbandText = '🏡 Husband back from work';
-            }
-          });
-        }
-
-        const combined = [
-          classText,
-          husbandText,
-          officeText,
-          lepakText && `🧋 ${lepakText}`
-        ].filter(Boolean).join('<br>');
-
-        const isOfficeHour = ['Monday','Tuesday','Wednesday','Thursday','Friday'].includes(day) && hour >= 9 && hour < 18;
-        table += `<td class="${isOfficeHour ? 'office' : ''}">${combined}</td>`;
+        const hourLabel = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+        table += `<th>${hourLabel}</th>`;
       }
-      table += '</tr>';
+      table += '</tr></thead><tbody>';
+
+      for (const day of days) {
+        table += `<tr><th>${day}</th>`;
+        for (const hour of hours) {
+          const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+
+          let classText = classSchedule[day]?.find(e => e.includes(hourStr)) || '';
+          let lepakText = otherSchedule[day]?.find(e => e.includes(hourStr)) || '';
+
+          let husbandText = '';
+          if (husbandSchedule[day]) {
+            husbandSchedule[day].forEach(range => {
+              const [start, end] = parseTimeRange(range);
+              if (start && to24hr(start) === hour) {
+                husbandText = '👨‍💼 Husband go to work';
+              }
+              if (end && to24hr(end) === hour) {
+                husbandText = '🏡 Husband back from work';
+              }
+            });
+          }
+
+          // Office block logic
+          let isOfficeTime = ['Monday','Tuesday','Wednesday','Thursday','Friday'].includes(day) && hour >= 9 && hour < 18;
+          let officeCell = '';
+          if (isOfficeTime) {
+            if (officeSchedule[day]) {
+              officeCell = '🏢 Office';
+            }
+          }
+
+          const combined = [
+            classText,
+            husbandText,
+            officeCell ? `<span class="officeText">${officeCell}</span>` : '',
+            lepakText && `🧋 ${lepakText}`
+          ].filter(Boolean).join('<br>');
+
+          table += `<td class="${isOfficeTime ? 'office' : ''}">${combined}</td>`;
+        }
+        table += '</tr>';
+      }
+
+      table += '</tbody></table>';
+      document.getElementById('tableContainer').innerHTML = table;
     }
-
-    table += '</tbody></table>';
-    document.getElementById('tableContainer').innerHTML = table;
-  }
-</script>
-
+  </script>
 </body>
 </html>
