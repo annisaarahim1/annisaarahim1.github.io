@@ -21,21 +21,42 @@
     margin-top: 1rem;
   }
     
-  .container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   margin: 1.5rem;
+  padding: 0 1rem;
+}
+   
+.day-input {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section label {
+  font-size: 0.9rem;
+  width: 80px;
+}
+
+.section input[type="text"],
+.section input[type="checkbox"] {
+  flex: 1;
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 .section {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   border: 1.5px dashed #c6dac6;
   border-radius: 10px;
   padding: 0.8rem 1rem;
-  flex: 0 0 200px;
   box-shadow: 0 0 8px #e7d7e7;
+  width: 100%;
 }
 
 .section.office {
@@ -84,11 +105,18 @@
     background-color: #88a887;
   }
 
+#tableContainer {
+  margin: 2rem auto;
+  padding: 0 1rem 5rem;
+  max-width: 100%;
+  overflow-x: auto;
+}
+    
     table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
-  margin-top: 2rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 0 15px #d3cce3;
   border-radius: 12px;
@@ -99,7 +127,7 @@ th, td {
   border: 1px solid #ddd;
   text-align: center;
   padding: 8px;
-  min-width: 70px;
+  word-wrap: break-word;
 }
 
 th {
@@ -289,5 +317,8 @@ tr:nth-child(even) {
       document.getElementById('tableContainer').innerHTML = table;
     }
   </script>
+
+<div style="height: 40px;"></div>
+  
 </body>
 </html>
