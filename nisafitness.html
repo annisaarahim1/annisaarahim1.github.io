@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weekly Fitness Planner</title>
   <style>
-    body {
+body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #fff5fb;
   padding: 20px;
@@ -14,6 +14,7 @@
 h1 {
   text-align: center;
   color: #d26fa7;
+  font-size: 28px;
 }
 .input-wrapper {
   display: flex;
@@ -23,7 +24,7 @@ h1 {
 }
 .section {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
   background-color: #fff;
   border: 1px solid #f0b7d3;
   padding: 10px;
@@ -34,15 +35,18 @@ h1 {
   color: #b25390;
 }
 .day-input {
-  margin: 5px 0;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
 }
 label {
-  display: inline-block;
-  width: 80px;
+  width: 90px;
   font-weight: bold;
+  flex-shrink: 0;
 }
 input[type="text"] {
-  width: 140px;
+  flex-grow: 1;
+  min-width: 130px;
 }
 table {
   width: 100%;
@@ -50,7 +54,7 @@ table {
   font-size: 14px;
 }
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #bbb; /* brighter lines */
   padding: 6px;
   text-align: center;
   vertical-align: top;
@@ -68,19 +72,20 @@ th {
   </style>
 </head>
 <body>
-  <h1>💪 Weekly Fitness Planner</h1>
 
-  <div class="input-wrapper">
+  <h1>Nisa Weekly Fitness Planner 💖</h1>
+
+<div class="input-wrapper">
+  <div class="section" id="officeScheduleInputs">
+    <h3>🏢 Office Days</h3>
+  </div>
+
   <div class="section" id="classScheduleInputs">
     <h3>🏋️‍♀️ Class Schedule</h3>
   </div>
 
   <div class="section" id="husbandScheduleInputs">
     <h3>👨‍💼 Husband's Work</h3>
-  </div>
-
-  <div class="section" id="officeScheduleInputs">
-    <h3>🏢 Office Days</h3>
   </div>
 
   <div class="section" id="otherScheduleInputs">
@@ -151,9 +156,18 @@ th {
 
       let table = '<table><thead><tr><th>Day / Time</th>';
       for (const hour of hours) {
-        const hourLabel = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-        table += `<th>${hourLabel}</th>`;
-      }
+  let hourLabel = '';
+  if (hour === 12) {
+    hourLabel = '12pm';
+  } else if (hour < 12) {
+    hourLabel = `${hour}am`;
+  } else if (hour < 24) {
+    hourLabel = `${hour - 12}pm`;
+  } else {
+    hourLabel = '12am';
+  }
+  table += `<th>${hourLabel}</th>`;
+}
       table += '</tr></thead><tbody>';
 
       for (const day of days) {
