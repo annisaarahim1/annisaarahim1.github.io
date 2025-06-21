@@ -113,7 +113,6 @@
     
     table {
   width: 100%;
-  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
   background-color: rgba(255, 255, 255, 0.95);
@@ -127,6 +126,8 @@ th, td {
   text-align: center;
   padding: 8px;
   word-wrap: break-word;
+  white-space: normal;
+  vertical-align: top;
 }
 
 th {
@@ -138,8 +139,17 @@ th {
   z-index: 2;
 }
 
+td {
+  max-height: 80px;
+  overflow: auto;
+}
+
 tr:nth-child(even) {
   background-color: #f7f5f9;
+}
+
+tbody tr {
+  transition: all 0.2s ease-in-out;
 }
 
 .office {
