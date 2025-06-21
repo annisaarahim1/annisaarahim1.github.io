@@ -357,10 +357,10 @@ tbody tr {
     const saved = localStorage.getItem('savedTableHTML');
   if (saved) {
     document.getElementById('tableContainer').innerHTML = saved;
-    loadInputs();
-    toggleInputs(false); // Only hide after inputs are created and filled
+    loadInputs(); // load saved text into created inputs
+    toggleInputs(false); // now we can hide
   } else {
-    toggleInputs(true); // Show inputs if no table saved yet
+    toggleInputs(true); // show input boxes if there's no saved table
   }
   }
 
@@ -375,17 +375,6 @@ tbody tr {
     });
   }
 
-  // INIT
-  window.onload = () => {
-  createInputs('classScheduleInputs', 'class');
-  createInputs('husbandScheduleInputs', 'husband');
-  createInputs('officeScheduleInputs', 'office', true);
-  createInputs('otherScheduleInputs', 'other');
-
-  // Load table after inputs created
-  loadSavedTable();
-};
-
   function saveTimetable() {
   const tableElement = document.getElementById('tableContainer');
   html2canvas(tableElement).then(canvas => {
@@ -395,6 +384,17 @@ tbody tr {
     link.click();
   });
 }
+
+// INIT
+  window.onload = () => {
+  createInputs('classScheduleInputs', 'class');
+  createInputs('husbandScheduleInputs', 'husband');
+  createInputs('officeScheduleInputs', 'office', true);
+  createInputs('otherScheduleInputs', 'other');
+
+  // Load table after inputs created
+  loadSavedTable();
+};
 
 </script>
 
