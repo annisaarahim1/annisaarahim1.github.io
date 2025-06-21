@@ -285,77 +285,106 @@ tbody tr {
   }
 
   function generateTable(save = true) {
-    const classSchedule = collectSchedule('class');
-    const husbandSchedule = collectSchedule('husband');
-    const officeSchedule = collectSchedule('office', true);
-    const otherSchedule = collectSchedule('other');
+  const classSchedule = collectSchedule('class');
+  const husbandSchedule = collectSchedule('husband');
+  const officeSchedule = collectSchedule('office', true);
+  const otherSchedule = collectSchedule('other');
 
-    const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6am–12am
+  const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6am–12am
 
-    function to24hr(hourStr) {
-      let num = parseInt(hourStr);
-      if (hourStr.includes('pm') && num !== 12) num += 12;
-      if (hourStr.includes('am') && num === 12) num = 0;
-      return num;
-    }
-
-    let table = '<table><thead><tr><th>Day / Time</th>';
-    for (const hour of hours) {
-      let hourLabel = '';
-      if (hour === 12) hourLabel = '12pm';
-      else if (hour < 12) hourLabel = `${hour}am`;
-      else hourLabel = `${hour - 12}pm`;
-      table += `<th>${hourLabel}</th>`;
-    }
-    table += '</tr></thead><tbody>';
-
-    for (const day of days) {
-      table += `<tr><th>${day}</th>`;
-      for (const hour of hours) {
-        const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-
-        let classText = classSchedule[day]?.find(e => e.includes(hourStr)) || '';
-        let lepakText = otherSchedule[day]?.find(e => e.includes(hourStr)) || '';
-
-        let husbandText = '';
-        if (husbandSchedule[day]) {
-          husbandSchedule[day].forEach(range => {
-            const [start, end] = parseTimeRange(range);
-            if (start && to24hr(start) === hour) husbandText = '👨‍💼 Husband go to work';
-            if (end && to24hr(end) === hour) husbandText = '🏡 Husband back from work';
-          });
-        }
-
-        let isOfficeTime = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
-        let officeCell = '';
-        if (isOfficeTime && officeSchedule[day]) {
-          officeCell = '🏢 Office';
-        }
-
-        const combined = [
-          classText,
-          husbandText,
-          officeCell ? `<span class="officeText">${officeCell}</span>` : '',
-          lepakText && `🧋 ${lepakText}`
-        ].filter(Boolean).join('<br>');
-
-        table += `<td class="${isOfficeTime ? 'office' : ''}">${combined}</td>`;
-      }
-      table += '</tr>';
-    }
-
-    table += '</tbody></table>';
-    document.getElementById('tableContainer').innerHTML = table;
-
-    if (save) {
-      const allInputs = {};
-      document.querySelectorAll('.day-input input').forEach(input => {
-        allInputs[input.id] = input.type === 'checkbox' ? input.checked : input.value;
-      });
-      saveAllData(table, allInputs);
-      toggleInputs(false);
-    }
+  function to24hr(hourStr) {
+    let num = parseInt(hourStr);
+    if (hourStr.includes('pm') && num !== 12) num += 12;
+    if (hourStr.includes('am') && num === 12) num = 0;
+    return num;
   }
+
+  function parseTimeRange(str) {
+    const match = str.match(/(\d{1,2})(am|pm)\s*-\s*(\d{1,2})(am|pm)/i);
+    if (!match) return null;
+    const start = to24hr(match[1] + match[2].toLowerCase());
+    const end = to24hr(match[3] + match[4].toLowerCase());
+    return [start, end];
+  }
+
+  let table = '<table><thead><tr><th>Day / Time</th>';
+  for (const hour of hours) {
+    let hourLabel = '';
+    if (hour === 12) hourLabel = '12pm';
+    else if (hour < 12) hourLabel = `${hour}am`;
+    else hourLabel = `${hour - 12}pm`;
+    table += `<th>${hourLabel}</th>`;
+  }
+  table += '</tr></thead><tbody>';
+
+  for (const day of days) {
+    table += `<tr><th>${day}</th>`;
+
+    for (const hour of hours) {
+      const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+
+      let classText = classSchedule[day]?.find(e => e.includes(hourStr));
+      classText = classText ? classText.replace(hourStr, '').trim() : '';
+
+      // Handle Lepak range or exact match
+      let lepakText = '';
+      if (otherSchedule[day]) {
+        for (const entry of otherSchedule[day]) {
+          const range = parseTimeRange(entry);
+          if (range) {
+            const [start, end] = range;
+            if (hour >= start && hour <= end) {
+              lepakText = entry.replace(/\d{1,2}(am|pm)\s*-\s*\d{1,2}(am|pm)/i, '').trim();
+              break;
+            }
+          } else if (entry.includes(hourStr)) {
+            lepakText = entry.replace(hourStr, '').trim();
+            break;
+          }
+        }
+      }
+
+      // Husband’s schedule
+      let husbandText = '';
+      if (husbandSchedule[day]) {
+        husbandSchedule[day].forEach(range => {
+          const [start, end] = parseTimeRange(range) || [];
+          if (start && to24hr(start) === hour) husbandText = '👨‍💼 Husband go to work';
+          if (end && to24hr(end) === hour) husbandText = '🏡 Husband back from work';
+        });
+      }
+
+      let isOfficeTime = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
+      let officeCell = '';
+      if (isOfficeTime && officeSchedule[day]) {
+        officeCell = '🏢 Office';
+      }
+
+      const combined = [
+        classText,
+        husbandText,
+        officeCell ? `<span class="officeText">${officeCell}</span>` : '',
+        lepakText && `🧋 ${lepakText}`
+      ].filter(Boolean).join('<br>');
+
+      table += `<td class="${isOfficeTime ? 'office' : ''}">${combined}</td>`;
+    }
+
+    table += '</tr>';
+  }
+
+  table += '</tbody></table>';
+  document.getElementById('tableContainer').innerHTML = table;
+
+  if (save) {
+    const allInputs = {};
+    document.querySelectorAll('.day-input input').forEach(input => {
+      allInputs[input.id] = input.type === 'checkbox' ? input.checked : input.value;
+    });
+    saveAllData(table, allInputs);
+    toggleInputs(false);
+  }
+}
 
   function loadSavedTable() {
     const saved = localStorage.getItem('savedTableHTML');
