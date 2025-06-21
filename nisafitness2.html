@@ -23,57 +23,50 @@
     
 .container {
   display: flex;
-  flex-wrap: nowrap; /* 👈 prevent wrapping */
+  flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 1rem;
-  margin: 1.5rem;
+  gap: 0.6rem;
+  margin: 1.2rem;
   padding: 0 1rem;
-  overflow-x: auto; /* 👈 make it scroll if needed */
 }
 
 .section {
- flex: 0 0 24%; /* 👈 control the width precisely */
-  min-width: 200px;
+ flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.5rem 0.8rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1.5px dashed #c6dac6;
+  border-radius: 10px;
+  box-shadow: 0 0 6px #e7d7e7;
 }
    
 .day-input {
-  margin: 6px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  margin: 4px 0;
 }
 
 .section label {
-  font-size: 0.9rem;
-  width: 80px;
+  font-size: 0.85rem;
+  width: 65px;
+  margin: 0;
 }
 
 .section input[type="text"],
 .section input[type="checkbox"] {
   flex: 1;
-  font-size: 0.85rem;
-  padding: 4px 6px;
-  border-radius: 6px;
+  font-size: 0.8rem;
+  padding: 3px 5px;
+  border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.section {
-  background-color: rgba(255, 255, 255, 0.95);
-  border: 1.5px dashed #c6dac6;
-  border-radius: 10px;
-  padding: 0.8rem 1rem;
-  box-shadow: 0 0 8px #e7d7e7;
-  width: 100%;
-}
-
 .section.office {
-  flex: 0 0 150px;
+  flex: 0 0 140px;
+  min-width: 120px;
+  padding: 0.5rem;
 }
-
-  /* Make Office Days box smaller */
-  .section.office {
-    min-width: 180px;
-  }
 
   .section h2 {
     color: #a670a2;
@@ -101,7 +94,6 @@
     padding: 0.75rem 1.5rem;
     margin: 1rem auto;
     display: block;
-    border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
