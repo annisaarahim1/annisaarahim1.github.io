@@ -250,6 +250,24 @@ tbody tr {
     return schedule;
   }
 
+  function saveAllData(tableHTML, inputs) {
+    localStorage.setItem('savedTableHTML', tableHTML);
+    localStorage.setItem('savedInputs', JSON.stringify(inputs));
+  }
+
+  function loadInputs() {
+    const saved = localStorage.getItem('savedInputs');
+    if (!saved) return;
+    const inputs = JSON.parse(saved);
+    for (const key in inputs) {
+      const el = document.getElementById(key);
+      if (el) {
+        if (el.type === 'checkbox') el.checked = inputs[key];
+        else el.value = inputs[key];
+      }
+    }
+  }
+
   function parseTimeRange(str) {
     const match = str.match(/(\d{1,2}(am|pm))\s*-\s*(\d{1,2}(am|pm))/i);
     if (!match) return [];
@@ -320,7 +338,11 @@ tbody tr {
     document.getElementById('tableContainer').innerHTML = table;
 
     if (save) {
-      localStorage.setItem('savedTableHTML', table);
+      const allInputs = {};
+      document.querySelectorAll('.day-input input').forEach(input => {
+        allInputs[input.id] = input.type === 'checkbox' ? input.checked : input.value;
+      });
+      saveAllData(table, allInputs);
       toggleInputs(false);
     }
   }
@@ -329,12 +351,14 @@ tbody tr {
     const saved = localStorage.getItem('savedTableHTML');
     if (saved) {
       document.getElementById('tableContainer').innerHTML = saved;
+      loadInputs();
       toggleInputs(false);
     }
   }
 
   function resetAll() {
     localStorage.removeItem('savedTableHTML');
+    localStorage.removeItem('savedInputs');
     document.getElementById('tableContainer').innerHTML = '';
     toggleInputs(true);
     document.querySelectorAll('.day-input input').forEach(input => {
@@ -343,7 +367,7 @@ tbody tr {
     });
   }
 
-  // 🧠 INIT
+  // INIT
   window.onload = () => {
     createInputs('classScheduleInputs', 'class');
     createInputs('husbandScheduleInputs', 'husband');
@@ -352,6 +376,7 @@ tbody tr {
     loadSavedTable();
   };
 </script>
+
 
 <div style="height: 40px;"></div>
   
