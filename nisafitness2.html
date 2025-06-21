@@ -11,7 +11,7 @@
   body {
     font-family: 'Quicksand', sans-serif;
     background: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), #f9f6f1;
-    color: #4b4b4b;
+    color: #4b4b4b;f
     margin: 0;
     padding: 0;
   }
@@ -355,11 +355,13 @@ tbody tr {
 
   function loadSavedTable() {
     const saved = localStorage.getItem('savedTableHTML');
-    if (saved) {
-      document.getElementById('tableContainer').innerHTML = saved;
-      loadInputs();
-      toggleInputs(false);
-    }
+  if (saved) {
+    document.getElementById('tableContainer').innerHTML = saved;
+    loadInputs();
+    toggleInputs(false); // Only hide after inputs are created and filled
+  } else {
+    toggleInputs(true); // Show inputs if no table saved yet
+  }
   }
 
   function resetAll() {
@@ -375,13 +377,12 @@ tbody tr {
 
   // INIT
   window.onload = () => {
-  // Always create input fields first
   createInputs('classScheduleInputs', 'class');
   createInputs('husbandScheduleInputs', 'husband');
   createInputs('officeScheduleInputs', 'office', true);
   createInputs('otherScheduleInputs', 'other');
 
-  // THEN load the saved table, which might hide inputs if needed
+  // Load table after inputs created
   loadSavedTable();
 };
 
