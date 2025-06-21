@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Weekly Fitness Planner</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
   <style>
   body {
     font-family: 'Quicksand', sans-serif;
@@ -210,6 +212,8 @@ tbody tr {
   <button id="newBtn" onclick="resetAll()" style="display: none;">🆕 Generate New</button>
 </div>
 
+  <button id="saveBtn" onclick="saveTimetable()" style="display: none;">💾 Save Timetable</button>
+
   <div id="tableContainer" style="margin-top: 30px;"></div>
 
 <script>
@@ -232,10 +236,12 @@ tbody tr {
   }
 
   function toggleInputs(show) {
-    document.querySelector('.container').style.display = show ? 'flex' : 'none';
-    document.querySelector('button[onclick="generateTable()"]').style.display = show ? 'block' : 'none';
-    document.getElementById('editBtn').style.display = show ? 'none' : 'inline-block';
-    document.getElementById('newBtn').style.display = show ? 'none' : 'inline-block';
+  document.querySelector('.container').style.display = show ? 'flex' : 'none';
+  document.querySelector('button[onclick="generateTable()"]').style.display = show ? 'block' : 'none';
+  document.getElementById('editBtn').style.display = show ? 'none' : 'inline-block';
+  document.getElementById('newBtn').style.display = show ? 'none' : 'inline-block';
+  document.getElementById('printBtn')?.style.display = show ? 'none' : 'inline-block';
+  document.getElementById('saveBtn').style.display = show ? 'none' : 'inline-block';
   }
 
   function collectSchedule(prefix, isCheckbox = false) {
@@ -375,6 +381,17 @@ tbody tr {
     createInputs('otherScheduleInputs', 'other');
     loadSavedTable();
   };
+
+  function saveTimetable() {
+  const tableElement = document.getElementById('tableContainer');
+  html2canvas(tableElement).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'Nisa_Weekly_Timetable.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
 </script>
 
 
