@@ -375,12 +375,15 @@ tbody tr {
 
   // INIT
   window.onload = () => {
-    createInputs('classScheduleInputs', 'class');
-    createInputs('husbandScheduleInputs', 'husband');
-    createInputs('officeScheduleInputs', 'office', true);
-    createInputs('otherScheduleInputs', 'other');
-    loadSavedTable();
-  };
+  // Always create input fields first
+  createInputs('classScheduleInputs', 'class');
+  createInputs('husbandScheduleInputs', 'husband');
+  createInputs('officeScheduleInputs', 'office', true);
+  createInputs('otherScheduleInputs', 'other');
+
+  // THEN load the saved table, which might hide inputs if needed
+  loadSavedTable();
+};
 
   function saveTimetable() {
   const tableElement = document.getElementById('tableContainer');
