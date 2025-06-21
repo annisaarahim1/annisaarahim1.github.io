@@ -351,10 +351,13 @@ tbody tr {
       let husbandText = '';
       if (husbandSchedule[day]) {
         husbandSchedule[day].forEach(range => {
-          const [start, end] = parseTimeRange(range) || [];
-          if (start && to24hr(start) === hour) husbandText = '👨‍💼 Husband go to work';
-          if (end && to24hr(end) === hour) husbandText = '🏡 Husband back from work';
-        });
+          const parsed = parseTimeRange(range);
+          if (parsed) {
+          const [start, end] = parsed;
+          if (hour === start) husbandText = '👨‍💼 Husband go to work';
+          if (hour === end) husbandText = '🏡 Husband back from work';
+    }
+  });
       }
 
       let isOfficeTime = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
