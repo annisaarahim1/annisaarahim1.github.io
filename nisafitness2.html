@@ -240,8 +240,12 @@ tbody tr {
   document.querySelector('button[onclick="generateTable()"]').style.display = show ? 'block' : 'none';
   document.getElementById('editBtn').style.display = show ? 'none' : 'inline-block';
   document.getElementById('newBtn').style.display = show ? 'none' : 'inline-block';
-  document.getElementById('printBtn')?.style.display = show ? 'none' : 'inline-block';
   document.getElementById('saveBtn').style.display = show ? 'none' : 'inline-block';
+
+  const printBtn = document.getElementById('printBtn');
+  if (printBtn) {
+    printBtn.style.display = show ? 'none' : 'inline-block';
+  }
   }
 
   function collectSchedule(prefix, isCheckbox = false) {
