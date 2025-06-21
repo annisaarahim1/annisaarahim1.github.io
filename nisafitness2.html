@@ -237,7 +237,10 @@ tbody tr {
 
   function toggleInputs(show) {
   document.querySelector('.container').style.display = show ? 'flex' : 'none';
-  document.querySelector('button[onclick="generateTable()"]').style.display = show ? 'block' : 'none';
+  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
+    if (generateBtn) {
+    generateBtn.style.display = show ? 'block' : 'none';
+  }
   document.getElementById('editBtn').style.display = show ? 'none' : 'inline-block';
   document.getElementById('newBtn').style.display = show ? 'none' : 'inline-block';
   document.getElementById('saveBtn').style.display = show ? 'none' : 'inline-block';
@@ -384,6 +387,10 @@ tbody tr {
     saveAllData(table, allInputs);
     toggleInputs(false);
   }
+
+document.getElementById('tableContainer').innerHTML = ''; // 👈 add this before setting new table
+document.getElementById('tableContainer').innerHTML = table;
+
 }
 
   function loadSavedTable() {
