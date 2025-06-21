@@ -197,7 +197,7 @@ tbody tr {
   </div>
 
   <div class="section" id="husbandScheduleInputs">
-    <h3>👨‍💼 Husband's Work</h3>
+    <h3>👨‍💼 Hubby's Schedule</h3>
   </div>
 
   <div class="section" id="otherScheduleInputs">
@@ -354,8 +354,8 @@ tbody tr {
           const parsed = parseTimeRange(range);
           if (parsed) {
           const [start, end] = parsed;
-          if (hour === start) husbandText = '👨‍💼 Husband go to work';
-          if (hour === end) husbandText = '🏡 Husband back from work';
+          if (hour === start) husbandText = '👨‍💼 Hubby starts work';
+          if (hour === end) husbandText = '🏡 Hubby ends work';
     }
   });
       }
