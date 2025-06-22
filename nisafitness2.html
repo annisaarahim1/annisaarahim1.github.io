@@ -108,12 +108,19 @@
     background-color: #88a887;
   }
 
-#tableContainer {
-  margin: 2rem auto;
-  padding: 2rem;
-  max-width: 100%;
+#wallpaperWrapper {
   width: 100%;
-  box-sizing: border-box;
+  max-width: 100%;
+  height: auto;
+  padding: 2rem 1rem;
+  background-color: #f9f6f1;
+}
+    
+#tableContainer {
+  margin-top: 1rem;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 #tableContainer table {
@@ -225,8 +232,8 @@ tbody tr {
   </div>
   </div>
 
-<div id="wallpaperWrapper" style="width: 1920px; height: 1080px; background-color: #f9f6f1; display: flex; align-items: center; justify-content: center;">
-  <div id="tableContainer" style="width: 90%;"></div>
+<div id="wallpaperWrapper">
+  <div id="tableContainer"></div>
 </div>
 
 <script>
@@ -442,18 +449,34 @@ document.getElementById('tableContainer').innerHTML = table;
   }
 
 function saveTimetable() {
-  const element = document.getElementById('wallpaperWrapper');
+  const wrapper = document.getElementById('wallpaperWrapper');
+  const tableContainer = document.getElementById('tableContainer');
 
-  // Temporarily boost font
-  element.style.fontSize = '1.1rem';
+  // 💄 Backup original styles
+  const originalWrapperStyle = wrapper.getAttribute('style') || '';
+  const originalTableStyle = tableContainer.getAttribute('style') || '';
 
-  html2canvas(element, {
+  // 💖 Apply centered layout for saving
+  wrapper.setAttribute('style', `
+    width: 1920px;
+    height: 1080px;
+    background-color: #f9f6f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  `);
+
+  tableContainer.setAttribute('style', `
+    width: 90%;
+    margin: 0 auto;
+  `);
+
+  html2canvas(wrapper, {
     width: 1920,
     height: 1080,
     scale: 2,
     backgroundColor: '#f9f6f1',
-    windowWidth: 1920,
-    windowHeight: 1080,
     scrollX: 0,
     scrollY: -window.scrollY
   }).then(canvas => {
@@ -462,8 +485,9 @@ function saveTimetable() {
     link.href = canvas.toDataURL('image/png');
     link.click();
 
-    // Reset font after saving
-    element.style.fontSize = '';
+    // 💅 Restore original styles
+    wrapper.setAttribute('style', originalWrapperStyle);
+    tableContainer.setAttribute('style', originalTableStyle);
   });
 }
 
