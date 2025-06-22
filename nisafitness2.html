@@ -214,7 +214,12 @@ tbody tr {
 
   <button id="saveBtn" onclick="saveTimetable()" style="display: none;">💾 Save Timetable</button>
 
+ <div id="wallpaperWrapper" style="padding: 30px;">
+  <h2 id="wallpaperTitle" style="text-align: center; font-size: 1.8rem; color: #6d8f6e; margin-bottom: 20px;">
+    Nisa's Weekly Fitness Timetable 💪✨
+  </h2>
   <div id="tableContainer" style="margin-top: 30px;"></div>
+</div>
 
 <script>
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -419,10 +424,16 @@ document.getElementById('tableContainer').innerHTML = table;
   }
 
   function saveTimetable() {
-  const tableElement = document.getElementById('tableContainer');
-  html2canvas(tableElement).then(canvas => {
+  const element = document.getElementById('wallpaperWrapper');
+
+  html2canvas(element, {
+    width: 1920,
+    height: 1080,
+    scale: 2,
+    backgroundColor: '#f9f6f1'
+  }).then(canvas => {
     const link = document.createElement('a');
-    link.download = 'Nisa_Weekly_Timetable.png';
+    link.download = 'Nisa_Weekly_Timetable_Wallpaper.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
@@ -442,7 +453,7 @@ document.getElementById('tableContainer').innerHTML = table;
 </script>
 
 
-<div style="height: 40px;"></div>
+<div style="height: 10px;"></div>
   
 </body>
 </html>
