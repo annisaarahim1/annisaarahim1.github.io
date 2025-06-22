@@ -185,7 +185,7 @@ tbody tr {
 </head>
 <body>
 
-  <h1>Nisa Weekly Fitness Planner 💖</h1>
+<h1 id="mainTitle">Nisa Weekly Fitness Planner 💖</h1>
 
 <div class="container">
   <div class="section" id="officeScheduleInputs">
@@ -255,6 +255,10 @@ tbody tr {
   const printBtn = document.getElementById('printBtn');
   if (printBtn) {
     printBtn.style.display = show ? 'none' : 'inline-block';
+  }
+  // 💖 Show the title again if editing
+  if (show) {
+    document.getElementById('mainTitle').style.display = 'block';
   }
   }
 
@@ -396,6 +400,7 @@ tbody tr {
     });
     saveAllData(table, allInputs);
     toggleInputs(false);
+    document.getElementById('mainTitle').style.display = 'none'; // 💅 Hide the title
   }
 
 document.getElementById('tableContainer').innerHTML = ''; // 👈 add this before setting new table
