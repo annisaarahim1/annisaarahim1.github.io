@@ -249,7 +249,7 @@ tbody tr {
   function toggleInputs(show) {
   document.querySelector('.container').style.display = show ? 'flex' : 'none';
   const generateBtn = document.querySelector('button[onclick="generateTable()"]');
-    if (generateBtn) {
+  if (generateBtn) {
     generateBtn.style.display = show ? 'block' : 'none';
   }
 
@@ -257,18 +257,15 @@ tbody tr {
   if (printBtn) {
     printBtn.style.display = show ? 'none' : 'inline-block';
   }
-  // 💖 Show the title again if editing
-  if (show) {
-  document.getElementById('mainTitle').style.display = 'block';
-  document.getElementById('actionButtons').style.display = 'none';
-  } else {
-  document.getElementById('mainTitle').style.display = 'none';
-  document.getElementById('actionButtons').style.display = 'block';
-  }
 
-  document.querySelector('button[onclick="generateTable()"]').style.display = 'none';
-  
+  if (show) {
+    document.getElementById('mainTitle').style.display = 'block';
+    document.getElementById('actionButtons').style.display = 'none';
+  } else {
+    document.getElementById('mainTitle').style.display = 'none';
+    document.getElementById('actionButtons').style.display = 'block';
   }
+}
 
   function collectSchedule(prefix, isCheckbox = false) {
     const schedule = {};
