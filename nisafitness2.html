@@ -259,12 +259,17 @@ tbody tr {
   }
 
   if (show) {
-    document.getElementById('mainTitle').style.display = 'block';
-    document.getElementById('actionButtons').style.display = 'none';
+  document.querySelector('.container').style.display = 'flex';
+  document.getElementById('actionButtons').style.display = 'none';
+  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
+  if (generateBtn) generateBtn.style.display = 'block';
   } else {
-    document.getElementById('mainTitle').style.display = 'none';
-    document.getElementById('actionButtons').style.display = 'block';
+  document.querySelector('.container').style.display = 'none';
+  document.getElementById('actionButtons').style.display = 'block';
+  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
+  if (generateBtn) generateBtn.style.display = 'none';
   }
+    
 }
 
   function collectSchedule(prefix, isCheckbox = false) {
@@ -404,7 +409,6 @@ tbody tr {
     });
     saveAllData(table, allInputs);
     toggleInputs(false);
-    document.getElementById('mainTitle').style.display = 'none'; // 💅 Hide the title
   }
 
 document.getElementById('tableContainer').innerHTML = ''; // 👈 add this before setting new table
