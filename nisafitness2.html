@@ -214,11 +214,13 @@ tbody tr {
 
   <button id="saveBtn" onclick="saveTimetable()" style="display: none;">💾 Save Timetable</button>
 
- <div id="wallpaperWrapper" style="padding: 30px;">
-  <h2 id="wallpaperTitle" style="text-align: center; font-size: 1.8rem; color: #6d8f6e; margin-bottom: 20px;">
-    Nisa's Weekly Fitness Timetable 💪✨
-  </h2>
-  <div id="tableContainer" style="margin-top: 30px;"></div>
+ <div id="wallpaperWrapper" style="width: 100%; max-width: 100%; height: auto; padding: 60px 0; background-color: #f9f6f1;">
+  <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #6d8f6e; margin-bottom: 1.5rem;">
+      Nisa Weekly Fitness Planner 💖
+    </h1>
+    <div id="tableContainer" style="margin-top: 0;"></div>
+  </div>
 </div>
 
 <script>
@@ -423,17 +425,19 @@ document.getElementById('tableContainer').innerHTML = table;
     });
   }
 
-  function saveTimetable() {
+function saveTimetable() {
   const element = document.getElementById('wallpaperWrapper');
 
   html2canvas(element, {
     width: 1920,
     height: 1080,
     scale: 2,
-    backgroundColor: '#f9f6f1'
+    backgroundColor: '#f9f6f1',
+    windowWidth: 1920,
+    windowHeight: 1080
   }).then(canvas => {
     const link = document.createElement('a');
-    link.download = 'Nisa_Weekly_Timetable_Wallpaper.png';
+    link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
@@ -453,7 +457,7 @@ document.getElementById('tableContainer').innerHTML = table;
 </script>
 
 
-<div style="height: 10px;"></div>
+<div style="height: 5px;"></div>
   
 </body>
 </html>
