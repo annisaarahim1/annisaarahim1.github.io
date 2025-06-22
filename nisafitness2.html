@@ -7,6 +7,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
+  <meta name="theme-color" content="#f9f6f1">
+
   <style>
   body {
     font-family: 'Quicksand', sans-serif;
@@ -108,12 +110,16 @@
 
 #tableContainer {
   margin: 2rem auto;
-  padding: 0 1rem 5rem;
+  padding: 0 1rem 1rem;
   max-width: 100%;
   overflow-x: auto;
 }
+
+#tableContainer table {
+  margin: 0 auto;
+}
     
-    table {
+  table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
@@ -207,18 +213,17 @@ tbody tr {
 
   <button onclick="generateTable()">✨ Generate Timetable</button>
 
-  <div style="text-align: center; margin-top: 1rem;">
-  <button id="editBtn" onclick="toggleInputs(true)" style="display: none;">✏️ Edit</button>
-  <button id="newBtn" onclick="resetAll()" style="display: none;">🆕 Generate New</button>
-  <button id="saveBtn" onclick="saveTimetable()" style="display: none;">💾 Save Timetable</button>
-</div>
+  <div id="actionButtons" style="display: none; text-align: center; margin-top: 1rem;">
+  <div style="display: inline-flex; gap: 10px;">
+    <button id="editBtn" onclick="toggleInputs(true)">✏️ Edit</button>
+    <button id="newBtn" onclick="resetAll()">🆕 Generate New</button>
+    <button id="saveBtn" onclick="saveTimetable()">💾 Save Timetable</button>
+  </div>
+  </div>
 
  <div id="wallpaperWrapper" style="width: 100%; max-width: 100%; height: auto; padding: 60px 0; background-color: #f9f6f1;">
   <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #6d8f6e; margin-bottom: 1.5rem;">
-      Nisa Weekly Fitness Planner 💖
-    </h1>
-    <div id="tableContainer" style="margin-top: 0;"></div>
+  <div id="tableContainer" style="margin-top: 0;"></div>
   </div>
 </div>
 
@@ -247,9 +252,6 @@ tbody tr {
     if (generateBtn) {
     generateBtn.style.display = show ? 'block' : 'none';
   }
-  document.getElementById('editBtn').style.display = show ? 'none' : 'inline-block';
-  document.getElementById('newBtn').style.display = show ? 'none' : 'inline-block';
-  document.getElementById('saveBtn').style.display = show ? 'none' : 'inline-block';
 
   const printBtn = document.getElementById('printBtn');
   if (printBtn) {
@@ -257,8 +259,15 @@ tbody tr {
   }
   // 💖 Show the title again if editing
   if (show) {
-    document.getElementById('mainTitle').style.display = 'block';
+  document.getElementById('mainTitle').style.display = 'block';
+  document.getElementById('actionButtons').style.display = 'none';
+  } else {
+  document.getElementById('mainTitle').style.display = 'none';
+  document.getElementById('actionButtons').style.display = 'block';
   }
+
+  document.querySelector('button[onclick="generateTable()"]').style.display = 'none';
+  
   }
 
   function collectSchedule(prefix, isCheckbox = false) {
@@ -390,7 +399,6 @@ tbody tr {
   }
 
   table += '</tbody></table>';
-  document.getElementById('tableContainer').innerHTML = table;
 
   if (save) {
     const allInputs = {};
@@ -427,6 +435,7 @@ document.getElementById('tableContainer').innerHTML = table;
       if (input.type === 'checkbox') input.checked = false;
       else input.value = '';
     });
+    document.getElementById('actionButtons').style.display = 'none';
   }
 
 function saveTimetable() {
