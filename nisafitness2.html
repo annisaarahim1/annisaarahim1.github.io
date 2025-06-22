@@ -110,17 +110,21 @@
 
 #tableContainer {
   margin: 2rem auto;
-  padding: 0 1rem 1rem;
+  padding: 2rem;
   max-width: 100%;
-  overflow-x: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #tableContainer table {
   margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
 }
     
   table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.85rem;
   background-color: rgba(255, 255, 255, 0.95);
@@ -221,10 +225,8 @@ tbody tr {
   </div>
   </div>
 
- <div id="wallpaperWrapper" style="width: 100%; max-width: 100%; height: auto; padding: 60px 0; background-color: #f9f6f1;">
-  <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-  <div id="tableContainer" style="margin-top: 0;"></div>
-  </div>
+<div id="wallpaperWrapper" style="width: 1920px; height: 1080px; background-color: #f9f6f1; display: flex; align-items: center; justify-content: center;">
+  <div id="tableContainer" style="width: 90%;"></div>
 </div>
 
 <script>
@@ -442,18 +444,26 @@ document.getElementById('tableContainer').innerHTML = table;
 function saveTimetable() {
   const element = document.getElementById('wallpaperWrapper');
 
+  // Temporarily boost font
+  element.style.fontSize = '1.1rem';
+
   html2canvas(element, {
     width: 1920,
     height: 1080,
     scale: 2,
     backgroundColor: '#f9f6f1',
     windowWidth: 1920,
-    windowHeight: 1080
+    windowHeight: 1080,
+    scrollX: 0,
+    scrollY: -window.scrollY
   }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
+
+    // Reset font after saving
+    element.style.fontSize = '';
   });
 }
 
