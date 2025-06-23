@@ -127,13 +127,15 @@
 
 #tableContainer table {
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
+  min-width: unset;
 }
     
   table {
   width: 100%;
-  table-layout: auto; /* 💥 changed from fixed */
+  table-layout: auto;
   border-collapse: collapse;
+  font-size: 0.78rem; /* 🔍 smaller font to fit more cols */
 }
 
 th, td {
@@ -166,7 +168,7 @@ td {
 }
 
 td, th {
-  padding: 10px 12px; /* increased from 8px for space */
+  padding: 6px 4px; /* increased from 8px for space */
 }
 
 tr:nth-child(even) {
@@ -346,7 +348,7 @@ tbody tr {
     return [start, end];
   }
     
-    let table = '<table><thead><tr><th style="min-width: 130px; padding: 10px;">Day / Time</th>';
+    let table = '<table><thead><tr><th style="min-width: 90px; padding: 4px 6px;">Day / Time</th>';
 
     for (const hour of hours) {
     let hourLabel = '';
@@ -358,8 +360,7 @@ tbody tr {
   table += '</tr></thead><tbody>';
 
   for (const day of days) {
-    table += `<tr><th style="min-width: 130px; padding: 10px;">${day}</th>`;
-
+    table += `<tr><th style="min-width: 90px; padding: 4px 6px;">${day}</th>`;
 
     for (const hour of hours) {
       const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
