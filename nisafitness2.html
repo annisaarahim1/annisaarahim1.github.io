@@ -127,7 +127,8 @@
 #tableContainer table {
   margin: 0 auto;
   width: 100%;
-  max-width: 100%;
+  table-layout: fixed;
+  min-width: 1200px; /* 👈 give room to breathe */
 }
     
   table {
@@ -146,10 +147,11 @@ th, td {
 }
 
 th {
-  white-space: nowrap; /* 👈 make sure it's all in one line */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: unset;
+  font-size: 0.8rem;
+  min-width: 65px; /* 👈 force a bit more room */
   padding: 6px 6px;
 }
 
