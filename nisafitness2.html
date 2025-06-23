@@ -120,15 +120,17 @@
 }
     
 #tableContainer {
-  overflow-x: hidden !important; /* 👈 FORCE no scroll */
+  overflow-x: auto;
   padding: 0 1rem;
   margin-top: 1.5rem;
 }
 
 #tableContainer table {
   margin: 0 auto;
-  width: 100%;
-  min-width: unset;
+  max-width: 100%;
+  width: calc(100% - 3rem); /* ⬅️ space on left + right */
+  table-layout: fixed;
+  min-width: 1200px;
 }
     
   table {
