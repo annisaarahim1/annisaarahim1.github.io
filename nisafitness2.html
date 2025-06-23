@@ -443,6 +443,50 @@ document.getElementById('tableContainer').innerHTML = table;
     document.getElementById('actionButtons').style.display = 'none';
   }
 
+  function saveTimetable() {
+  const wrapper = document.getElementById('wallpaperWrapper');
+  const tableContainer = document.getElementById('tableContainer');
+
+  // 💄 Backup original styles
+  const originalWrapperStyle = wrapper.getAttribute('style') || '';
+  const originalTableStyle = tableContainer.getAttribute('style') || '';
+
+  // 💖 Apply centered layout for saving
+  wrapper.setAttribute('style', `
+    width: 1920px;
+    height: 1080px;
+    background-color: #f9f6f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  `);
+
+  tableContainer.setAttribute('style', `
+    width: 90%;
+    margin: 0 auto;
+  `);
+
+  html2canvas(wrapper, {
+    width: 1920,
+    height: 1080,
+    scale: 2,
+    backgroundColor: '#f9f6f1',
+    windowWidth: 1920,
+    windowHeight: 1080,
+    scrollY: -window.scrollY
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    // 💅 Restore original styles AFTER canvas is done
+    wrapper.setAttribute('style', originalWrapperStyle);
+    tableContainer.setAttribute('style', originalTableStyle);
+  });
+    
+}
 function saveTimetable() {
   const wrapper = document.getElementById('wallpaperWrapper');
   const tableContainer = document.getElementById('tableContainer');
@@ -468,21 +512,20 @@ function saveTimetable() {
   `);
 
   html2canvas(wrapper, {
-  width: 1920,
-  height: 1080,
-  scale: 2,
-  backgroundColor: '#f9f6f1',
-  windowWidth: 1920,
-  windowHeight: 1080,
-  scrollY: -window.scrollY // 👈 so canvas ignores scroll position!
-}).then(canvas => {
-  const link = document.createElement('a');
-  link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-});
+    width: 1920,
+    height: 1080,
+    scale: 2,
+    backgroundColor: '#f9f6f1',
+    windowWidth: 1920,
+    windowHeight: 1080,
+    scrollY: -window.scrollY
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
 
-    // 💅 Restore original styles
+    // 💅 Restore original styles AFTER canvas is done
     wrapper.setAttribute('style', originalWrapperStyle);
     tableContainer.setAttribute('style', originalTableStyle);
   });
