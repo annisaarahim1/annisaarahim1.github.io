@@ -338,8 +338,8 @@ tbody tr {
     return [start, end];
   }
 
-  let table = '<table><thead><tr><th>Day / Time</th>';
-  for (const hour of hours) {
+    let table = '<table><thead><tr><th style="min-width: 100px; padding: 10px;">Day / Time</th>';
+    for (const hour of hours) {
     let hourLabel = '';
     if (hour === 12) hourLabel = '12pm';
     else if (hour < 12) hourLabel = `${hour}am`;
@@ -349,7 +349,7 @@ tbody tr {
   table += '</tr></thead><tbody>';
 
   for (const day of days) {
-    table += `<tr><th>${day}</th>`;
+    table += `<tr><th style="min-width: 100px; padding: 10px;">${day}</th>`;
 
     for (const hour of hours) {
       const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
