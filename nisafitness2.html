@@ -157,12 +157,9 @@ th {
 }
 
 th:first-child {
-  min-width: 110px;
-  max-width: 130px;
-  padding: 10px;
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: unset;
+  word-break: break-word; /* 💥 this is the magic line */
+  white-space: normal;    /* allow wrap */
+  overflow-wrap: break-word;
 }
 
 td {
