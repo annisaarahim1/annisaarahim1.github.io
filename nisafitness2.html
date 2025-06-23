@@ -53,8 +53,9 @@
 
 .section label {
   font-size: 0.85rem;
-  width: 65px;
+  width: 80px; /* ⬅️ increase width to fit full day names + ":" */
   margin: 0;
+  white-space: nowrap; /* ⬅️ keep label text in one line */
 }
 
 .section input[type="text"],
@@ -67,8 +68,8 @@
 }
 
 .section.office {
-  flex: 0 0 140px;
-  min-width: 120px;
+  flex: 0 0 100px; /* ⬅️ reduce width */
+  min-width: 100px;
   padding: 0.5rem;
 }
 
@@ -120,15 +121,15 @@
     
 #tableContainer {
   overflow-x: hidden !important; /* 👈 FORCE no scroll */
-  padding: 0;
+  padding: 0 1rem;
   margin-top: 1.5rem;
 }
 
 #tableContainer table {
   margin: 0 auto;
-  width: 100%;
+  width: 95%; /* ⬅️ keeps some space on both sides */
   table-layout: fixed;
-  min-width: 1200px; /* 👈 give room to breathe */
+  min-width: 1200px;
 }
     
   table {
@@ -151,8 +152,8 @@ th {
   overflow: visible;
   text-overflow: unset;
   font-size: 0.8rem;
-  min-width: 65px; /* 👈 force a bit more room */
-  padding: 6px 6px;
+  min-width: 65px;
+  padding: 8px 10px; /* ⬅️ this makes it breathe more */
 }
 
 td {
