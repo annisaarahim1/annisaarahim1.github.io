@@ -514,7 +514,7 @@ function saveTimetable() {
   wrapper.setAttribute('style', `
   width: 1920px;
   height: 1080px;
-  background-image: url('https://i.imgur.com/QrTTrhF.jpeg');
+  background-image: url('https://i.imgur.com/iCh3aWO.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -536,7 +536,8 @@ function saveTimetable() {
     backgroundColor: null,
     windowWidth: 1920,
     windowHeight: 1080,
-    scrollY: -window.scrollY
+    scrollY: -window.scrollY,
+    useCORS: true
   }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
