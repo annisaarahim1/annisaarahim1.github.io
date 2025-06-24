@@ -32,6 +32,7 @@
   text-align: center;
   color: #e8749b;
   margin-top: 1rem;
+  margin-bottom: 1.5rem; /* 💖 add spacing below the title */
   font-size: 4.0rem;
   letter-spacing: 1px;
 }
@@ -122,6 +123,8 @@
 
 #wallpaperWrapper {
   display: flex;
+  flex-direction: column; /* 👈 stack vertically */
+  align-items: center;
   justify-content: center;
   padding: 40px 0;
   width: 100%;
