@@ -263,6 +263,16 @@ tbody tr {
 <script>
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+  const dayLabels = {
+  'Monday': 'Mon',
+  'Tuesday': 'Tue',
+  'Wednesday': 'Wed',
+  'Thursday': 'Thu',
+  'Friday': 'Fri',
+  'Saturday': 'Sat',
+  'Sunday': 'Sun'
+};
+
   function createInputs(containerId, prefix, isCheckbox = false) {
     const container = document.getElementById(containerId);
     days.forEach(day => {
@@ -376,13 +386,13 @@ tbody tr {
   table += '</tr></thead><tbody>';
 
   for (const day of days) {
-    table += `<tr><th style="min-width: 90px; padding: 4px 6px;">${day}</th>`;
+    table += `<tr><th style="min-width: 130px; padding: 10px;">${dayLabels[day]}</th>`;
 
     for (const hour of hours) {
       const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
 
       let classText = classSchedule[day]?.find(e => e.includes(hourStr));
-      classText = classText ? classText.replace(hourStr, '').trim() : '';
+      classText = classText ? '🧘‍♀️ ' + classText.replace(hourStr, '').trim() : '';
 
       // Handle Lepak range or exact match
       let lepakText = '';
@@ -409,8 +419,8 @@ tbody tr {
           const parsed = parseTimeRange(range);
           if (parsed) {
           const [start, end] = parsed;
-          if (hour === start) husbandText = '👨‍💼 Hubby starts work';
-          if (hour === end) husbandText = '🏡 Hubby ends work';
+          if (hour === start) husbandText = '🚗 Hubby starts work';
+          if (hour === end) husbandText = '🚗 Hubby ends work';
     }
   });
       }
