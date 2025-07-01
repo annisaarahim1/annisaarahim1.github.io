@@ -127,15 +127,21 @@
   height: auto;
   background-color: #f9f6f1;
 }
+
+body {
+  overflow-x: hidden;
+}
     
 #tableContainer {
   padding: 0 1rem;
   margin-top: 1.5rem;
+  width: 100%;
+  overflow-x: auto;
 }
 
 #tableContainer table {
   width: 100%;
-  margin: 0 auto;
+  min-width: 1000px;
   table-layout: fixed;
 }
     
