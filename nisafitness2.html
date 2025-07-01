@@ -129,24 +129,21 @@
 }
     
 #tableContainer {
-  overflow-x: auto;
   padding: 0 1rem;
   margin-top: 1.5rem;
 }
 
 #tableContainer table {
+  width: 100%;
   margin: 0 auto;
-  max-width: 100%;
-  width: calc(100% - 3rem); /* ⬅️ space on left + right */
   table-layout: fixed;
-  min-width: 1200px;
 }
     
-  table {
+table {
   width: 100%;
-  table-layout: auto;
+  table-layout: auto; /* ❗ Change from fixed if you want flexible */
   border-collapse: collapse;
-  font-size: 0.78rem; /* 🔍 smaller font to fit more cols */
+  font-size: 0.75rem;
 }
 
 th, td {
