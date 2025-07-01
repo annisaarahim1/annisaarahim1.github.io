@@ -141,7 +141,6 @@ body {
 
 #tableContainer table {
   width: 100%;
-  min-width: 1000px;
   table-layout: fixed;
 }
     
@@ -155,30 +154,24 @@ table {
 th, td {
   border: 1px solid #ddd;
   text-align: center;
-  padding: 3px;
+  padding: 2px; /* ⬅️ smaller padding */
+  font-size: 0.6rem; /* ⬅️ reduce font size */
   word-wrap: break-word;
   white-space: normal;
   vertical-align: top;
 }
 
 th {
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: unset;
-  font-size: 0.8rem;
-  min-width: 65px;
-  padding: 8px 10px; /* ⬅️ this makes it breathe more */
+  min-width: auto;
+  padding: 4px 5px;
 }
 
 th:first-child {
-  word-break: break-word; /* 💥 this is the magic line */
-  white-space: normal;    /* allow wrap */
-  overflow-wrap: break-word;
+  min-width: 60px;
 }
 
 td {
-  max-height: 80px;
-  overflow: auto;
+  max-height: 70px;
 }
 
 td, th {
@@ -198,8 +191,7 @@ tbody tr {
 }
 
 .officeText {
-  font-weight: bold;
-  color: #734f96;
+  font-size: 0.65rem;
 }
 
   footer {
