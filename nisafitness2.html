@@ -95,6 +95,10 @@
     margin-bottom: 0.5rem;
   }
 
+  .hubbyText {
+  font-size: 0.65rem;
+  }
+
   label {
     display: block;
     margin: 0.5rem 0;
@@ -426,8 +430,8 @@ tbody tr {
           const parsed = parseTimeRange(range);
           if (parsed) {
           const [start, end] = parsed;
-          if (hour === start) husbandText = '🚗 Hubby starts work';
-          if (hour === end) husbandText = '🚗 Hubby ends work';
+          if (hour === start) husbandText = '<span class="hubbyText">🚗 Hubby starts work</span>';
+          if (hour === end) husbandText = '<span class="hubbyText">🚗 Hubby ends work</span>';
     }
   });
       }
