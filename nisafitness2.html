@@ -177,18 +177,14 @@ th {
   padding: 4px 5px;
 }
 
-th:first-child {
-  min-width: 50px;
-  max-width: 60px;
-  padding: 4px 4px;
-  font-size: 0.6rem;
-}
-
+th:first-child,
 td:first-child {
-  min-width: 50px;
-  max-width: 60px;
-  padding: 4px 4px;
-  font-size: 0.6rem;
+  min-width: 40px;
+  max-width: 50px;
+  width: 45px;
+  padding: 4px 2px;
+  font-size: 0.55rem;
+  white-space: nowrap;
 }
 
 td {
@@ -385,7 +381,7 @@ tbody tr {
     return [start, end];
   }
     
-   let table = '<table><thead><tr><th style="min-width: 50px; max-width: 60px; padding: 4px;">Day</th>';
+   let table = '<table><thead><tr><th style="min-width:40px; max-width:50px; width:45px; padding:4px 2px;">Day</th>';
 
     for (const hour of hours) {
     let hourLabel = '';
@@ -397,7 +393,7 @@ tbody tr {
   table += '</tr></thead><tbody>';
 
   for (const day of days) {
-    table += `<tr><th style="min-width: 50px; max-width: 60px; padding: 6px;">${dayLabels[day]}</th>`;
+    table += `<tr><th style="min-width:40px; max-width:50px; width:45px; padding:6px 2px;">${dayLabels[day]}</th>`;
 
     for (const hour of hours) {
       const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
