@@ -135,10 +135,10 @@ body {
 #tableContainer {
   padding: 0 1rem;
   margin-top: 1.5rem;
-  width: max-content;
+  width: 100%;
   overflow-x: auto;
-  transform: scale(0.75);
-  transform-origin: top center;
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1600px) {
@@ -150,6 +150,7 @@ body {
 #tableContainer table {
   width: max-content;
   table-layout: auto;
+  margin: 0 auto;
 }
     
 table {
