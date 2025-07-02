@@ -10,6 +10,11 @@
   <meta name="theme-color" content="#f9f6f1">
 
   <style>
+
+* {
+  box-sizing: border-box;
+}
+    
   body {
     font-family: 'Quicksand', sans-serif;
     background-color: #f9f6f1;
@@ -136,9 +141,11 @@ body {
   padding: 0 1rem;
   margin-top: 1.5rem;
   width: 100%;
+  max-width: 100vw;
   overflow-x: auto;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1600px) {
@@ -148,7 +155,8 @@ body {
 }
 
 #tableContainer table {
-  width: max-content;
+  width: fit-content;
+  max-width: 100%;
   table-layout: auto;
   margin: 0 auto;
 }
