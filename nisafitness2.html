@@ -165,8 +165,8 @@ table {
 th, td {
   border: 1px solid #ddd;
   text-align: center;
-  padding: 2px; /* ⬅️ smaller padding */
-  font-size: 0.6rem; /* ⬅️ reduce font size */
+  padding: 8px 6px;
+  font-size: 0.85rem; /* ⬅️ reduce font size */
   word-wrap: break-word;
   white-space: normal;
   vertical-align: top;
@@ -506,27 +506,27 @@ function saveTimetable() {
 
   // 🌸 Apply layout
   wrapper.setAttribute('style', `
-    width: 1920px;
-    height: 1080px;
+    width: 3000px;
+    height: 2000px;
     background-color: #f9f6f1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 60px;
   `);
   tableContainer.setAttribute('style', `
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
   `);
 
   html2canvas(wrapper, {
-    width: 1920,
-    height: 1080,
-    scale: 2,
+    width: 3000,
+    height: 2000,
+    scale: 3, /* crisp sharp HD babyyy */
     backgroundColor: null,
-    windowWidth: 1920,
-    windowHeight: 1080,
+    windowWidth: 3000,
+    windowHeight: 2000,
     scrollY: -window.scrollY,
     useCORS: true
   }).then(canvas => {
