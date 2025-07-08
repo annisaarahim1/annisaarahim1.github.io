@@ -10,37 +10,37 @@
   <meta name="theme-color" content="#f9f6f1">
 
   <style>
-
 * {
   box-sizing: border-box;
 }
-    
-  body {
-    font-family: 'Quicksand', sans-serif;
-    background-color: #f9f6f1;
-    color: #4b4b4b;
-    margin: 0;
-    padding: 0;
-  }
 
-  @font-face {
-    font-family: 'Super Adorable';
-    src: url('https://raw.githubusercontent.com/annisaarahim1/annisaarahim1.github.io/main/SuperAdorable.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #f9f6f1;
+  color: #4b4b4b;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
 }
 
-  h1#mainTitle {
+@font-face {
+  font-family: 'Super Adorable';
+  src: url('https://raw.githubusercontent.com/annisaarahim1/annisaarahim1.github.io/main/SuperAdorable.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1#mainTitle {
   font-family: 'Super Adorable', cursive;
   text-align: center;
   color: #e8749b;
   margin-top: 1rem;
-  margin-bottom: 1.5rem; /* 💖 add spacing below the title */
-  font-size: 4.0rem;
+  margin-bottom: 1.5rem;
+  font-size: 5rem;
   letter-spacing: 1px;
 }
-    
+
 .container {
   display: flex;
   flex-wrap: nowrap;
@@ -51,7 +51,7 @@
 }
 
 .section {
- flex: 1 1 auto;
+  flex: 1 1 auto;
   min-width: 0;
   padding: 0.5rem 0.8rem;
   background-color: rgba(255, 255, 255, 0.95);
@@ -59,7 +59,7 @@
   border-radius: 10px;
   box-shadow: 0 0 6px #e7d7e7;
 }
-   
+
 .day-input {
   display: flex;
   align-items: center;
@@ -68,66 +68,66 @@
 }
 
 .section label {
-  font-size: 0.85rem;
-  width: 80px; /* ⬅️ increase width to fit full day names + ":" */
+  font-size: 1rem;
+  width: 80px;
   margin: 0;
-  white-space: nowrap; /* ⬅️ keep label text in one line */
+  white-space: nowrap;
 }
 
 .section input[type="text"],
 .section input[type="checkbox"] {
   flex: 1;
-  font-size: 0.8rem;
-  padding: 3px 5px;
+  font-size: 1rem;
+  padding: 6px 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 .section.office {
-  flex: 0 0 100px; /* ⬅️ reduce width */
+  flex: 0 0 100px;
   min-width: 100px;
   padding: 0.5rem;
 }
 
-  .section h2 {
-    color: #a670a2;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
+.section h2 {
+  color: #a670a2;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
 
-  .hubbyText {
-  font-size: 0.65rem;
-  }
+.hubbyText {
+  font-size: 1.2rem;
+}
 
-  label {
-    display: block;
-    margin: 0.5rem 0;
-  }
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
 
-  input[type="text"] {
-    width: 95%;
-    padding: 0.5rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #fcfcf9;
-  }
+input[type="text"] {
+  width: 95%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fcfcf9;
+}
 
-  button {
-    background-color: #a5c5a0;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    margin: 1rem auto;
-    display: block;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: 'Quicksand', sans-serif;
-  }
+button {
+  background-color: #a5c5a0;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.7rem;
+  margin: 1rem auto;
+  display: block;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+}
 
-  button:hover {
-    background-color: #88a887;
-  }
+button:hover {
+  background-color: #88a887;
+}
 
 #wallpaperWrapper {
   padding: 2rem;
@@ -135,12 +135,13 @@
   max-width: 100%;
   height: auto;
   background-color: #f9f6f1;
+  font-size: 1.2rem;
 }
 
 body {
   overflow-x: hidden;
 }
-    
+
 #tableContainer {
   padding: 0 1rem;
   margin-top: 1.5rem;
@@ -153,24 +154,24 @@ body {
 }
 
 #tableContainer table {
-  width: 95vw; /* Almost full width */
+  width: 95vw;
   max-width: 95vw;
   table-layout: fixed;
 }
-    
+
 table {
   width: 95vw;
   max-width: 95vw;
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 0.9rem; /* Bigger text */
+  font-size: 1.2rem;
 }
 
 th, td {
   border: 1px solid #ddd;
   text-align: center;
-  padding: 8px 6px;
-  font-size: 0.85rem; /* ⬅️ reduce font size */
+  padding: 10px 8px;
+  font-size: 1.2rem;
   word-wrap: break-word;
   white-space: normal;
   vertical-align: top;
@@ -178,25 +179,21 @@ th, td {
 
 th {
   min-width: auto;
-  padding: 4px 5px;
+  padding: 6px 8px;
 }
 
 th:first-child,
 td:first-child {
-  min-width: 40px;
-  max-width: 50px;
-  width: 45px;
-  padding: 4px 2px;
-  font-size: 0.55rem;
+  min-width: 50px;
+  max-width: 60px;
+  width: 55px;
+  padding: 6px 4px;
+  font-size: 1rem;
   white-space: nowrap;
 }
 
 td {
   max-height: 70px;
-}
-
-td, th {
-  padding: 6px 4px; /* increased from 8px for space */
 }
 
 tr:nth-child(even) {
@@ -212,355 +209,24 @@ tbody tr {
 }
 
 .officeText {
-  font-size: 0.65rem;
+  font-size: 1.2rem;
 }
 
-  footer {
-    text-align: center;
-    font-size: 0.8rem;
-    padding: 2rem 1rem;
-    background: linear-gradient(to right, #e8d8f1, #b7d6b2);
-    color: #4a4a4a;
-    margin-top: 3rem;
-  }
+footer {
+  text-align: center;
+  font-size: 1rem;
+  padding: 2rem 1rem;
+  background: linear-gradient(to right, #e8d8f1, #b7d6b2);
+  color: #4a4a4a;
+  margin-top: 3rem;
+}
 
-  footer::before {
-    content: "🍄🌷🧺";
-    display: block;
-    font-size: 1.5rem;
-    margin-bottom: 0.3rem;
-  }
+footer::before {
+  content: "🍄🌷🧺";
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
 
 </style>
-
-  
 </head>
-<body>
-
-<h1 id="mainTitle">Nisa Weekly Fitness Planner 💪🏻</h1>
-
-<div class="container">
-  <div class="section" id="officeScheduleInputs">
-    <h3>🏢 Office Days</h3>
-  </div>
-
-  <div class="section" id="classScheduleInputs">
-    <h3>🏋️‍♀️ Class Schedule</h3>
-  </div>
-
-  <div class="section" id="husbandScheduleInputs">
-    <h3>👨‍💼 Hubby's Schedule</h3>
-  </div>
-
-  <div class="section" id="otherScheduleInputs">
-    <h3>🧋 Lepak Plans</h3>
-  </div>
-</div>
-
-  <button onclick="generateTable()">✨ Generate Timetable</button>
-
-  <div id="actionButtons" style="display: none; text-align: center; margin-top: 1rem;">
-  <div style="display: inline-flex; gap: 10px;">
-    <button id="editBtn" onclick="toggleInputs(true)">✏️ Edit</button>
-    <button id="newBtn" onclick="resetAll()">🆕 Generate New</button>
-    <button id="saveBtn" onclick="saveTimetable()">💾 Save Timetable</button>
-  </div>
-  </div>
-
-<div id="wallpaperWrapper">
-  
-<div id="tableContainer"></div>
-
-<script>
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-  const dayLabels = {
-  'Monday': 'Mon',
-  'Tuesday': 'Tue',
-  'Wednesday': 'Wed',
-  'Thursday': 'Thu',
-  'Friday': 'Fri',
-  'Saturday': 'Sat',
-  'Sunday': 'Sun'
-};
-
-  function createInputs(containerId, prefix, isCheckbox = false) {
-    const container = document.getElementById(containerId);
-    days.forEach(day => {
-      const div = document.createElement('div');
-      div.className = 'day-input';
-      const label = document.createElement('label');
-      label.textContent = `${day}:`;
-      const input = document.createElement('input');
-      input.type = isCheckbox ? 'checkbox' : 'text';
-      input.id = `${prefix}_${day}`;
-      div.appendChild(label);
-      div.appendChild(input);
-      container.appendChild(div);
-    });
-  }
-
-  function toggleInputs(show) {
-  document.querySelector('.container').style.display = show ? 'flex' : 'none';
-  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
-  if (generateBtn) {
-    generateBtn.style.display = show ? 'block' : 'none';
-  }
-
-  const printBtn = document.getElementById('printBtn');
-  if (printBtn) {
-    printBtn.style.display = show ? 'none' : 'inline-block';
-  }
-
-  if (show) {
-  document.querySelector('.container').style.display = 'flex';
-  document.getElementById('actionButtons').style.display = 'none';
-  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
-  if (generateBtn) generateBtn.style.display = 'block';
-  } else {
-  document.querySelector('.container').style.display = 'none';
-  document.getElementById('actionButtons').style.display = 'block';
-  const generateBtn = document.querySelector('button[onclick="generateTable()"]');
-  if (generateBtn) generateBtn.style.display = 'none';
-  }
-    
-}
-
-  function collectSchedule(prefix, isCheckbox = false) {
-    const schedule = {};
-    days.forEach(day => {
-      const el = document.getElementById(`${prefix}_${day}`);
-      const value = isCheckbox ? el.checked : el.value.trim();
-      if (value) {
-        schedule[day] = isCheckbox ? true : value.split(',').map(e => e.trim());
-      }
-    });
-    return schedule;
-  }
-
-  function saveAllData(tableHTML, inputs) {
-    localStorage.setItem('savedTableHTML', tableHTML);
-    localStorage.setItem('savedInputs', JSON.stringify(inputs));
-  }
-
-  function loadInputs() {
-    const saved = localStorage.getItem('savedInputs');
-    if (!saved) return;
-    const inputs = JSON.parse(saved);
-    for (const key in inputs) {
-      const el = document.getElementById(key);
-      if (el) {
-        if (el.type === 'checkbox') el.checked = inputs[key];
-        else el.value = inputs[key];
-      }
-    }
-  }
-
-  function parseTimeRange(str) {
-    const match = str.match(/(\d{1,2}(am|pm))\s*-\s*(\d{1,2}(am|pm))/i);
-    if (!match) return [];
-    return [match[1].toLowerCase(), match[3].toLowerCase()];
-  }
-
-  function generateTable(save = true) {
-  const classSchedule = collectSchedule('class');
-  const husbandSchedule = collectSchedule('husband');
-  const officeSchedule = collectSchedule('office', true);
-  const otherSchedule = collectSchedule('other');
-
-  const hours = Array.from({ length: 18 }, (_, i) => i + 6); // 6am–12am
-
-  function to24hr(hourStr) {
-    let num = parseInt(hourStr);
-    if (hourStr.includes('pm') && num !== 12) num += 12;
-    if (hourStr.includes('am') && num === 12) num = 0;
-    return num;
-  }
-
-  function parseTimeRange(str) {
-    const match = str.match(/(\d{1,2})(am|pm)\s*-\s*(\d{1,2})(am|pm)/i);
-    if (!match) return null;
-    const start = to24hr(match[1] + match[2].toLowerCase());
-    const end = to24hr(match[3] + match[4].toLowerCase());
-    return [start, end];
-  }
-    
-   let table = '<table><thead><tr><th style="min-width:50px; max-width:60px; width:55px; padding:4px 2px;">Day/Time</th>';
-
-    for (const hour of hours) {
-    let hourLabel = '';
-    if (hour === 12) hourLabel = '12pm';
-    else if (hour < 12) hourLabel = `${hour}am`;
-    else hourLabel = `${hour - 12}pm`;
-    table += `<th>${hourLabel}</th>`;
-  }
-  table += '</tr></thead><tbody>';
-
-  for (const day of days) {
-    table += `<tr><th style="min-width:40px; max-width:50px; width:45px; padding:6px 2px;">${dayLabels[day]}</th>`;
-
-    for (const hour of hours) {
-      const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
-
-      let classText = classSchedule[day]?.find(e => e.includes(hourStr));
-      classText = classText ? '🧘‍♀️ ' + classText.replace(hourStr, '').trim() : '';
-
-      // Handle Lepak range or exact match
-      let lepakText = '';
-      if (otherSchedule[day]) {
-        for (const entry of otherSchedule[day]) {
-          const range = parseTimeRange(entry);
-          if (range) {
-            const [start, end] = range;
-            if (hour >= start && hour <= end) {
-              lepakText = entry.replace(/\d{1,2}(am|pm)\s*-\s*\d{1,2}(am|pm)/i, '').trim();
-              break;
-            }
-          } else if (entry.includes(hourStr)) {
-            lepakText = entry.replace(hourStr, '').trim();
-            break;
-          }
-        }
-      }
-
-      // Husband’s schedule
-      let husbandText = '';
-      if (husbandSchedule[day]) {
-        husbandSchedule[day].forEach(range => {
-          const parsed = parseTimeRange(range);
-          if (parsed) {
-          const [start, end] = parsed;
-          if (hour === start) husbandText = '<span class="hubbyText">🚗 Hubby starts work</span>';
-          if (hour === end) husbandText = '<span class="hubbyText">🚗 Hubby ends work</span>';
-    }
-  });
-      }
-
-      let isOfficeTime = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
-      let officeCell = '';
-      if (isOfficeTime && officeSchedule[day]) {
-        officeCell = '🏢 Office';
-      }
-
-      const combined = [
-        classText,
-        husbandText,
-        officeCell ? `<span class="officeText">${officeCell}</span>` : '',
-        lepakText && `🧋 ${lepakText}`
-      ].filter(Boolean).join('<br>');
-
-      table += `<td class="${isOfficeTime ? 'office' : ''}">${combined}</td>`;
-    }
-
-    table += '</tr>';
-  }
-
-  table += '</tbody></table>';
-
-  if (save) {
-    const allInputs = {};
-    document.querySelectorAll('.day-input input').forEach(input => {
-      allInputs[input.id] = input.type === 'checkbox' ? input.checked : input.value;
-    });
-    saveAllData(table, allInputs);
-    toggleInputs(false);
-  }
-
-document.getElementById('tableContainer').innerHTML = ''; // 👈 add this before setting new table
-document.getElementById('tableContainer').innerHTML = table;
-
-}
-
-  function loadSavedTable() {
-    const saved = localStorage.getItem('savedTableHTML');
-  if (saved) {
-    document.getElementById('tableContainer').innerHTML = saved;
-    loadInputs(); // load saved text into created inputs
-    toggleInputs(false); // now we can hide
-  } else {
-    toggleInputs(true); // show input boxes if there's no saved table
-  }
-  }
-
-  function resetAll() {
-    localStorage.removeItem('savedTableHTML');
-    localStorage.removeItem('savedInputs');
-    document.getElementById('tableContainer').innerHTML = '';
-    toggleInputs(true);
-    document.querySelectorAll('.day-input input').forEach(input => {
-      if (input.type === 'checkbox') input.checked = false;
-      else input.value = '';
-    });
-    document.getElementById('actionButtons').style.display = 'none';
-  }
-
-function saveTimetable() {
-  const wrapper = document.getElementById('wallpaperWrapper');
-  const tableContainer = document.getElementById('tableContainer');
-  const mainTitle = document.getElementById('mainTitle');
-
-  // 👉 Clone the title and insert above the table
-  const clonedTitle = mainTitle.cloneNode(true);
-  clonedTitle.style.marginBottom = '30px';
-  wrapper.insertBefore(clonedTitle, tableContainer);
-
-  // 💄 Backup styles
-  const originalWrapperStyle = wrapper.getAttribute('style') || '';
-  const originalTableStyle = tableContainer.getAttribute('style') || '';
-
-  // 🌸 Apply layout
-  wrapper.setAttribute('style', `
-    width: 3000px;
-    height: 2000px;
-    background-color: #f9f6f1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px;
-  `);
-  tableContainer.setAttribute('style', `
-    width: 95%;
-    margin: 0 auto;
-  `);
-
-  html2canvas(wrapper, {
-    width: 3000,
-    height: 2000,
-    scale: 3, /* crisp sharp HD babyyy */
-    backgroundColor: null,
-    windowWidth: 3000,
-    windowHeight: 2000,
-    scrollY: -window.scrollY,
-    useCORS: true
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-
-    // 🧽 Remove clone & restore styles
-    wrapper.removeChild(clonedTitle);
-    wrapper.setAttribute('style', originalWrapperStyle);
-    tableContainer.setAttribute('style', originalTableStyle);
-  });
-}
-
-// INIT
-  window.onload = () => {
-  createInputs('classScheduleInputs', 'class');
-  createInputs('husbandScheduleInputs', 'husband');
-  createInputs('officeScheduleInputs', 'office', true);
-  createInputs('otherScheduleInputs', 'other');
-
-  // Load table after inputs created
-  loadSavedTable();
-};
-
-</script>
-
-
-<div style="height: 5px;"></div>
-  
-</body>
-</html>
