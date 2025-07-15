@@ -119,7 +119,7 @@
       width: 95vw;
       table-layout: fixed;
       border-collapse: collapse;
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
 
     th, td {
@@ -132,7 +132,7 @@
     }
 
     th:first-child, td:first-child {
-      font-size: 0.5rem;
+      font-size: 0.8rem;
       white-space: nowrap;
     }
 
@@ -164,7 +164,7 @@
   </div>
 
   <script>
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     function createInputs(containerId, prefix, isCheckbox = false) {
       const container = document.getElementById(containerId);
@@ -265,7 +265,7 @@
             });
           }
 
-          const isOfficeHour = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(day) && hour >= 9 && hour < 18;
+          const isOfficeHour = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
           const officeCell = isOfficeHour && officeSchedule[day] ? '<span class="officeText">🏢 Office</span>' : '';
 
           const cellContent = [classText, husbandText, officeCell, lepakText ? `🧋 ${lepakText}` : ''].filter(Boolean).join('<br>');
