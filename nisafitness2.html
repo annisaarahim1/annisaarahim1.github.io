@@ -164,7 +164,7 @@
   </div>
 
   <script>
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     function createInputs(containerId, prefix, isCheckbox = false) {
       const container = document.getElementById(containerId);
@@ -265,7 +265,7 @@
             });
           }
 
-          const isOfficeHour = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
+          const isOfficeHour = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(day) && hour >= 9 && hour < 18;
           const officeCell = isOfficeHour && officeSchedule[day] ? '<span class="officeText">🏢 Office</span>' : '';
 
           const cellContent = [classText, husbandText, officeCell, lepakText ? `🧋 ${lepakText}` : ''].filter(Boolean).join('<br>');
