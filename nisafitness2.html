@@ -136,20 +136,22 @@
       white-space: nowrap;
     }
 
+    table, th, td, .hubbyText, .officeText, .classText, .lepakText {
+      font-family: 'Quicksand', sans-serif !important;
+      font-size: 0.8rem !important;
+      color: #4b4b4b;
+    }
+
     .office {
       background-color: #e8e1f4;
     }
 
-    .hubbyText, .officeText {
-      font-size: 1rem;
-    }
-
     .buttonContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      }
 
 .buttonContainer button {
   margin: 0;  /* override the button margin auto */
@@ -181,7 +183,7 @@
   </div>
 
   <script>
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     function createInputs(containerId, prefix, isCheckbox = false) {
       const container = document.getElementById(containerId);
@@ -276,14 +278,14 @@
               const parsed = parseTimeRange(range);
               if (parsed) {
                 const [start, end] = parsed;
-                if (hour === start) husbandText = '<span class="hubbyText">🚗 Hubby starts work</span>';
-                if (hour === end) husbandText = '<span class="hubbyText">🚗 Hubby ends work</span>';
+                if (hour === start) husbandText = '🚗 Hubby starts work';
+                if (hour === end) husbandText = '🚗 Hubby ends work';
               }
             });
           }
 
-          const isOfficeHour = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
-          const officeCell = isOfficeHour && officeSchedule[day] ? '<span class="officeText">🏢 Office</span>' : '';
+          const isOfficeHour = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(day) && hour >= 9 && hour < 18;
+          const officeCell = isOfficeHour && officeSchedule[day] ? '🏢 Office' : '';
 
           const cellContent = [classText, husbandText, officeCell, lepakText ? `🧋 ${lepakText}` : ''].filter(Boolean).join('<br>');
           table += `<td class="${isOfficeHour ? 'office' : ''}">${cellContent}</td>`;
