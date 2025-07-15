@@ -191,7 +191,7 @@
         const div = document.createElement('div');
         div.className = 'day-input';
         const label = document.createElement('label');
-        label.textContent = `${day}:`;
+        label.textContent = `${fullDayNames[day]}:`;
         const input = document.createElement('input');
         input.type = isCheckbox ? 'checkbox' : 'text';
         input.id = `${prefix}_${day}`;
@@ -296,6 +296,16 @@
       table += '</tbody></table>';
       document.getElementById('tableContainer').innerHTML = table;
     }
+
+    const fullDayNames = {
+      Mon: 'Monday',
+      Tue: 'Tuesday',
+      Wed: 'Wednesday',
+      Thu: 'Thursday',
+      Fri: 'Friday',
+      Sat: 'Saturday',
+      Sun: 'Sunday'
+    };
 
     window.onload = () => {
       createInputs('classScheduleInputs', 'class');
