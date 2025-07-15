@@ -158,6 +158,7 @@
   </div>
 
   <button onclick="generateTable()">✨ Generate Timetable</button>
+  <button onclick="saveTimetable()">💾 Save Timetable</button>
 
   <div id="wallpaperWrapper">
     <div id="tableContainer"></div>
@@ -284,6 +285,58 @@
       createInputs('officeScheduleInputs', 'office', true);
       createInputs('otherScheduleInputs', 'other');
     };
+
+  function saveTimetable() {
+  const wrapper = document.getElementById('wallpaperWrapper');
+  const tableContainer = document.getElementById('tableContainer');
+  const mainTitle = document.getElementById('mainTitle');
+
+  // Clone the title to include in the image
+  const clonedTitle = mainTitle.cloneNode(true);
+  clonedTitle.style.marginBottom = '30px';
+  wrapper.insertBefore(clonedTitle, tableContainer);
+
+  // Store original styles
+  const originalWrapperStyle = wrapper.getAttribute('style') || '';
+  const originalTableStyle = tableContainer.getAttribute('style') || '';
+  const originalFontSize = wrapper.style.fontSize;
+
+  // Apply big size just for image
+  wrapper.style.width = '3000px';
+  wrapper.style.height = '2000px';
+  wrapper.style.padding = '60px';
+  wrapper.style.display = 'flex';
+  wrapper.style.flexDirection = 'column';
+  wrapper.style.alignItems = 'center';
+  wrapper.style.justifyContent = 'center';
+  wrapper.style.fontSize = '2.2rem'; // zoom in for download
+
+  tableContainer.style.width = '95%';
+  tableContainer.style.margin = '0 auto';
+
+  html2canvas(wrapper, {
+    width: 3000,
+    height: 2000,
+    scale: 3,
+    backgroundColor: null,
+    windowWidth: 3000,
+    windowHeight: 2000,
+    scrollY: -window.scrollY,
+    useCORS: true
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    // Clean up and restore
+    wrapper.removeChild(clonedTitle);
+    wrapper.setAttribute('style', originalWrapperStyle);
+    tableContainer.setAttribute('style', originalTableStyle);
+    wrapper.style.fontSize = originalFontSize;
+  });
+}  
+    
   </script>
 
 </body>
