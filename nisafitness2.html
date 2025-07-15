@@ -10,223 +10,281 @@
   <meta name="theme-color" content="#f9f6f1">
 
   <style>
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Quicksand', sans-serif;
-  background-color: #f9f6f1;
-  color: #4b4b4b;
-  margin: 0;
-  padding: 0;
-  font-size: 1.2rem;
-}
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f9f6f1;
+      color: #4b4b4b;
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      overflow-x: hidden;
+    }
 
-@font-face {
-  font-family: 'Super Adorable';
-  src: url('https://raw.githubusercontent.com/annisaarahim1/annisaarahim1.github.io/main/SuperAdorable.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+    @font-face {
+      font-family: 'Super Adorable';
+      src: url('https://raw.githubusercontent.com/annisaarahim1/annisaarahim1.github.io/main/SuperAdorable.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-h1#mainTitle {
-  font-family: 'Super Adorable', cursive;
-  text-align: center;
-  color: #e8749b;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-  font-size: 5rem;
-  letter-spacing: 1px;
-}
+    h1#mainTitle {
+      font-family: 'Super Adorable', cursive;
+      text-align: center;
+      color: #e8749b;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      font-size: 5rem;
+      letter-spacing: 1px;
+    }
 
-.container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 0.6rem;
-  margin: 1.2rem;
-  padding: 0 1rem;
-}
+    .container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 0.6rem;
+      margin: 1.2rem;
+      padding: 0 1rem;
+    }
 
-.section {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 0.5rem 0.8rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  border: 1.5px dashed #c6dac6;
-  border-radius: 10px;
-  box-shadow: 0 0 6px #e7d7e7;
-}
+    .section {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 2px dashed #c6dac6;
+      border-radius: 10px;
+      box-shadow: 0 0 6px #e7d7e7;
+    }
 
-.day-input {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 4px 0;
-}
+    .day-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+    }
 
-.section label {
-  font-size: 1rem;
-  width: 80px;
-  margin: 0;
-  white-space: nowrap;
-}
+    .section label {
+      font-size: 1.2rem;
+      width: 90px;
+      margin: 0;
+      white-space: nowrap;
+    }
 
-.section input[type="text"],
-.section input[type="checkbox"] {
-  flex: 1;
-  font-size: 1rem;
-  padding: 6px 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+    .section input[type="text"],
+    .section input[type="checkbox"] {
+      flex: 1;
+      font-size: 1.2rem;
+      padding: 6px 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-.section.office {
-  flex: 0 0 100px;
-  min-width: 100px;
-  padding: 0.5rem;
-}
+    button {
+      background-color: #a5c5a0;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 1.5rem auto;
+      display: block;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-.section h2 {
-  color: #a670a2;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-}
+    button:hover {
+      background-color: #88a887;
+    }
 
-.hubbyText {
-  font-size: 1.2rem;
-}
+    #wallpaperWrapper {
+      padding: 2rem;
+      width: 100%;
+      background-color: #f9f6f1;
+      font-size: 1.2rem;
+    }
 
-label {
-  display: block;
-  margin: 0.5rem 0;
-}
+    #tableContainer {
+      padding: 0 1rem;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
 
-input[type="text"] {
-  width: 95%;
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #fcfcf9;
-}
+    table {
+      width: 95vw;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 1.3rem;
+    }
 
-button {
-  background-color: #a5c5a0;
-  color: white;
-  border: none;
-  padding: 0.9rem 1.7rem;
-  margin: 1rem auto;
-  display: block;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Quicksand', sans-serif;
-}
+    th, td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 10px;
+      word-wrap: break-word;
+      white-space: normal;
+      vertical-align: top;
+    }
 
-button:hover {
-  background-color: #88a887;
-}
+    th:first-child, td:first-child {
+      font-size: 1.2rem;
+      white-space: nowrap;
+    }
 
-#wallpaperWrapper {
-  padding: 2rem;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  background-color: #f9f6f1;
-  font-size: 1.2rem;
-}
+    .office {
+      background-color: #e8e1f4;
+    }
 
-body {
-  overflow-x: hidden;
-}
+    .hubbyText, .officeText {
+      font-size: 1.1rem;
+    }
 
-#tableContainer {
-  padding: 0 1rem;
-  margin-top: 1.5rem;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: auto;
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-}
-
-#tableContainer table {
-  width: 95vw;
-  max-width: 95vw;
-  table-layout: fixed;
-}
-
-table {
-  width: 95vw;
-  max-width: 95vw;
-  table-layout: fixed;
-  border-collapse: collapse;
-  font-size: 1.2rem;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  text-align: center;
-  padding: 10px 8px;
-  font-size: 1.2rem;
-  word-wrap: break-word;
-  white-space: normal;
-  vertical-align: top;
-}
-
-th {
-  min-width: auto;
-  padding: 6px 8px;
-}
-
-th:first-child,
-td:first-child {
-  min-width: 50px;
-  max-width: 60px;
-  width: 55px;
-  padding: 6px 4px;
-  font-size: 1rem;
-  white-space: nowrap;
-}
-
-td {
-  max-height: 70px;
-}
-
-tr:nth-child(even) {
-  background-color: #f7f5f9;
-}
-
-tbody tr {
-  transition: all 0.2s ease-in-out;
-}
-
-.office {
-  background-color: #e8e1f4;
-}
-
-.officeText {
-  font-size: 1.2rem;
-}
-
-footer {
-  text-align: center;
-  font-size: 1rem;
-  padding: 2rem 1rem;
-  background: linear-gradient(to right, #e8d8f1, #b7d6b2);
-  color: #4a4a4a;
-  margin-top: 3rem;
-}
-
-footer::before {
-  content: "🍄🌷🧺";
-  display: block;
-  font-size: 2rem;
-  margin-bottom: 0.3rem;
-}
-
-</style>
+  </style>
 </head>
+<body>
+
+  <h1 id="mainTitle">Nisa Weekly Fitness Planner 💪🏻</h1>
+
+  <div class="container">
+    <div class="section" id="officeScheduleInputs"><h3>🏢 Office Days</h3></div>
+    <div class="section" id="classScheduleInputs"><h3>🏋️‍♀️ Class Schedule</h3></div>
+    <div class="section" id="husbandScheduleInputs"><h3>👨‍💼 Hubby's Schedule</h3></div>
+    <div class="section" id="otherScheduleInputs"><h3>🧋 Lepak Plans</h3></div>
+  </div>
+
+  <button onclick="generateTable()">✨ Generate Timetable</button>
+
+  <div id="wallpaperWrapper">
+    <div id="tableContainer"></div>
+  </div>
+
+  <script>
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    function createInputs(containerId, prefix, isCheckbox = false) {
+      const container = document.getElementById(containerId);
+      days.forEach(day => {
+        const div = document.createElement('div');
+        div.className = 'day-input';
+        const label = document.createElement('label');
+        label.textContent = `${day}:`;
+        const input = document.createElement('input');
+        input.type = isCheckbox ? 'checkbox' : 'text';
+        input.id = `${prefix}_${day}`;
+        div.appendChild(label);
+        div.appendChild(input);
+        container.appendChild(div);
+      });
+    }
+
+    function collectSchedule(prefix, isCheckbox = false) {
+      const schedule = {};
+      days.forEach(day => {
+        const el = document.getElementById(`${prefix}_${day}`);
+        const value = isCheckbox ? el.checked : el.value.trim();
+        if (value) {
+          schedule[day] = isCheckbox ? true : value.split(',').map(e => e.trim());
+        }
+      });
+      return schedule;
+    }
+
+    function to24hr(timeStr) {
+      let num = parseInt(timeStr);
+      if (timeStr.includes('pm') && num !== 12) num += 12;
+      if (timeStr.includes('am') && num === 12) num = 0;
+      return num;
+    }
+
+    function parseTimeRange(str) {
+      const match = str.match(/(\d{1,2})(am|pm)\s*-\s*(\d{1,2})(am|pm)/i);
+      if (!match) return null;
+      const start = to24hr(match[1] + match[2]);
+      const end = to24hr(match[3] + match[4]);
+      return [start, end];
+    }
+
+    function generateTable() {
+      const classSchedule = collectSchedule('class');
+      const husbandSchedule = collectSchedule('husband');
+      const officeSchedule = collectSchedule('office', true);
+      const otherSchedule = collectSchedule('other');
+
+      const hours = Array.from({ length: 18 }, (_, i) => i + 6);
+      let table = '<table><thead><tr><th>Day/Time</th>';
+      hours.forEach(hour => {
+        const label = hour === 12 ? '12pm' : hour < 12 ? `${hour}am` : `${hour - 12}pm`;
+        table += `<th>${label}</th>`;
+      });
+      table += '</tr></thead><tbody>';
+
+      days.forEach(day => {
+        table += `<tr><th>${day}</th>`;
+        hours.forEach(hour => {
+          const hourStr = hour < 12 ? `${hour}am` : hour < 24 ? `${hour - 12}pm` : '12am';
+          let classText = '';
+          if (classSchedule[day]) {
+            classSchedule[day].forEach(entry => {
+              if (entry.includes(hourStr)) {
+                classText = '🧘‍♀️ ' + entry.replace(hourStr, '').trim();
+              }
+            });
+          }
+
+          let lepakText = '';
+          if (otherSchedule[day]) {
+            for (const entry of otherSchedule[day]) {
+              const range = parseTimeRange(entry);
+              if (range) {
+                const [start, end] = range;
+                if (hour >= start && hour <= end) {
+                  lepakText = entry.replace(/\d{1,2}(am|pm)\s*-\s*\d{1,2}(am|pm)/i, '').trim();
+                  break;
+                }
+              } else if (entry.includes(hourStr)) {
+                lepakText = entry.replace(hourStr, '').trim();
+                break;
+              }
+            }
+          }
+
+          let husbandText = '';
+          if (husbandSchedule[day]) {
+            husbandSchedule[day].forEach(range => {
+              const parsed = parseTimeRange(range);
+              if (parsed) {
+                const [start, end] = parsed;
+                if (hour === start) husbandText = '<span class="hubbyText">🚗 Hubby starts work</span>';
+                if (hour === end) husbandText = '<span class="hubbyText">🚗 Hubby ends work</span>';
+              }
+            });
+          }
+
+          const isOfficeHour = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].includes(day) && hour >= 9 && hour < 18;
+          const officeCell = isOfficeHour && officeSchedule[day] ? '<span class="officeText">🏢 Office</span>' : '';
+
+          const cellContent = [classText, husbandText, officeCell, lepakText ? `🧋 ${lepakText}` : ''].filter(Boolean).join('<br>');
+          table += `<td class="${isOfficeHour ? 'office' : ''}">${cellContent}</td>`;
+        });
+        table += '</tr>';
+      });
+
+      table += '</tbody></table>';
+      document.getElementById('tableContainer').innerHTML = table;
+    }
+
+    window.onload = () => {
+      createInputs('classScheduleInputs', 'class');
+      createInputs('husbandScheduleInputs', 'husband');
+      createInputs('officeScheduleInputs', 'office', true);
+      createInputs('otherScheduleInputs', 'other');
+    };
+  </script>
+
+</body>
+</html>
