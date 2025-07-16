@@ -342,10 +342,15 @@
   tableContainer.style.width = '95%';
   tableContainer.style.margin = '0 auto';
 
+  // Boost table font size for high-res download
+  const table = tableContainer.querySelector('table');
+  const originalTableFontSize = table.style.fontSize;
+  table.style.fontSize = '1.8rem';
+    
   html2canvas(wrapper, {
     width: 3000,
     height: 2000,
-    scale: 3,
+    scale: 4,
     backgroundColor: null,
     windowWidth: 3000,
     windowHeight: 2000,
@@ -362,6 +367,7 @@
     wrapper.setAttribute('style', originalWrapperStyle);
     tableContainer.setAttribute('style', originalTableStyle);
     wrapper.style.fontSize = originalFontSize;
+    table.style.fontSize = originalTableFontSize;
   });
 }  
     
