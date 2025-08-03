@@ -314,14 +314,13 @@
       createInputs('otherScheduleInputs', 'other');
     };
 
-  function saveTimetable() {
+function saveTimetable() {
   const wrapper = document.getElementById('wallpaperWrapper');
   const tableContainer = document.getElementById('tableContainer');
   const mainTitle = document.getElementById('mainTitle');
 
-  // Clone the title to include in the image
   const clonedTitle = mainTitle.cloneNode(true);
-  clonedTitle.style.marginBottom = '30px';
+  clonedTitle.style.marginBottom = '40px';
   wrapper.insertBefore(clonedTitle, tableContainer);
 
   // Store original styles
@@ -329,31 +328,32 @@
   const originalTableStyle = tableContainer.getAttribute('style') || '';
   const originalFontSize = wrapper.style.fontSize;
 
-  // Apply big size just for image
-  wrapper.style.width = '3000px';
-  wrapper.style.height = '2000px';
-  wrapper.style.padding = '60px';
+  // FORCE full width for the download
+  wrapper.style.width = '5000px';
+  wrapper.style.height = '3000px';
+  wrapper.style.padding = '80px';
   wrapper.style.display = 'flex';
   wrapper.style.flexDirection = 'column';
   wrapper.style.alignItems = 'center';
   wrapper.style.justifyContent = 'center';
-  wrapper.style.fontSize = '2.2rem'; // zoom in for download
+  wrapper.style.fontSize = '3.2rem'; // make everything HUGE
 
-  tableContainer.style.width = '95%';
+  tableContainer.style.width = '100%';
   tableContainer.style.margin = '0 auto';
 
-  // Boost table font size for high-res download
+  // Enlarge the table directly
   const table = tableContainer.querySelector('table');
   const originalTableFontSize = table.style.fontSize;
-  table.style.fontSize = '1.8rem';
-    
+  table.style.fontSize = '2.6rem';
+  table.style.width = '100%';
+
   html2canvas(wrapper, {
-    width: 3000,
-    height: 2000,
-    scale: 4,
+    width: 5000,
+    height: 3000,
+    scale: 5, // Max resolution boost
     backgroundColor: null,
-    windowWidth: 3000,
-    windowHeight: 2000,
+    windowWidth: 5000,
+    windowHeight: 3000,
     scrollY: -window.scrollY,
     useCORS: true
   }).then(canvas => {
@@ -362,14 +362,14 @@
     link.href = canvas.toDataURL('image/png');
     link.click();
 
-    // Clean up and restore
+    // Restore all styles back
     wrapper.removeChild(clonedTitle);
     wrapper.setAttribute('style', originalWrapperStyle);
     tableContainer.setAttribute('style', originalTableStyle);
     wrapper.style.fontSize = originalFontSize;
     table.style.fontSize = originalTableFontSize;
   });
-}  
+}
     
   </script>
 
