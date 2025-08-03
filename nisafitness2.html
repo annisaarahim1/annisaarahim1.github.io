@@ -317,7 +317,13 @@
 function saveTimetable() {
   const wrapper = document.getElementById('wallpaperWrapper');
   const tableContainer = document.getElementById('tableContainer');
+  const table = tableContainer.querySelector('table');
   const mainTitle = document.getElementById('mainTitle');
+
+  if (!table) {
+    alert("Oi! Generate your timetable first, hun 💖");
+    return;
+  }
 
   const clonedTitle = mainTitle.cloneNode(true);
   clonedTitle.style.marginBottom = '40px';
@@ -342,21 +348,21 @@ function saveTimetable() {
   tableContainer.style.margin = '0 auto';
 
   // Enlarge the table directly
-  const table = tableContainer.querySelector('table');
   const originalTableFontSize = table.style.fontSize;
   table.style.fontSize = '2.6rem';
   table.style.width = '100%';
 
   html2canvas(wrapper, {
-    width: 5000,
-    height: 3000,
-    scale: 5, // Max resolution boost
-    backgroundColor: null,
-    windowWidth: 5000,
-    windowHeight: 3000,
-    scrollY: -window.scrollY,
-    useCORS: true
-  }).then(canvas => {
+  width: 4000,
+  height: 2500,
+  scale: 4, // safer than 5
+  backgroundColor: '#f9f6f1', // no transparency, fixes empty PNG
+  useCORS: true,
+  allowTaint: true,
+  logging: true
+})
+    
+    .then(canvas => {
     const link = document.createElement('a');
     link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
     link.href = canvas.toDataURL('image/png');
