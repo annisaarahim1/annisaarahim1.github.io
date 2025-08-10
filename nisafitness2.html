@@ -316,64 +316,36 @@
 
 function saveTimetable() {
   const wrapper = document.getElementById('wallpaperWrapper');
-  const tableContainer = document.getElementById('tableContainer');
-  const table = tableContainer.querySelector('table');
-  const mainTitle = document.getElementById('mainTitle');
-
+  const table = document.querySelector('#tableContainer table');
   if (!table) {
     alert("Oi! Generate your timetable first, hun 💖");
     return;
   }
 
-  const clonedTitle = mainTitle.cloneNode(true);
-  clonedTitle.style.marginBottom = '40px';
-  wrapper.insertBefore(clonedTitle, tableContainer);
-
-  // Store original styles
+  // Save original styles
   const originalWrapperStyle = wrapper.getAttribute('style') || '';
-  const originalTableStyle = tableContainer.getAttribute('style') || '';
-  const originalFontSize = wrapper.style.fontSize;
+  const originalTableStyle = table.getAttribute('style') || '';
 
-  // FORCE full width for the download
+  // Make it huge for wallpaper
   wrapper.style.width = '5000px';
-  wrapper.style.height = '3000px';
   wrapper.style.padding = '80px';
-  wrapper.style.display = 'flex';
-  wrapper.style.flexDirection = 'column';
-  wrapper.style.alignItems = 'center';
-  wrapper.style.justifyContent = 'center';
-  wrapper.style.fontSize = '3.2rem'; // make everything HUGE
-
-  tableContainer.style.width = '100%';
-  tableContainer.style.margin = '0 auto';
-
-  // Enlarge the table directly
-  const originalTableFontSize = table.style.fontSize;
+  wrapper.style.fontSize = '3.2rem';
   table.style.fontSize = '2.6rem';
   table.style.width = '100%';
 
   html2canvas(wrapper, {
-  width: 4000,
-  height: 2500,
-  scale: 4, // safer than 5
-  backgroundColor: '#f9f6f1', // no transparency, fixes empty PNG
-  useCORS: true,
-  allowTaint: true,
-  logging: true
-})
-    
-    .then(canvas => {
+    scale: 4, // high res
+    backgroundColor: '#f9f6f1',
+    useCORS: true
+  }).then(canvas => {
     const link = document.createElement('a');
     link.download = 'Nisa_Weekly_Fitness_Planner_Wallpaper.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
 
-    // Restore all styles back
-    wrapper.removeChild(clonedTitle);
+    // Restore original styles
     wrapper.setAttribute('style', originalWrapperStyle);
-    tableContainer.setAttribute('style', originalTableStyle);
-    wrapper.style.fontSize = originalFontSize;
-    table.style.fontSize = originalTableFontSize;
+    table.setAttribute('style', originalTableStyle);
   });
 }
     
